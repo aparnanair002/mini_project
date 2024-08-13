@@ -323,6 +323,7 @@ button:hover {
 
 .tm-mb-30 { margin-bottom: 30px; }
 
+
 @media (max-width: 1130px) and (min-width: 992px) {
     .tm-left-inner { max-width: 380px; }
     .tm-site-name { font-size: 2.6rem; }
