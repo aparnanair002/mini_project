@@ -11,7 +11,7 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <link rel="shortcut icon" href="imag/logo.png" type="">
+  <link rel="shortcut icon" href="images/logo.png" type="">
 
   <title> Dairy Direct </title>
 
@@ -35,12 +35,12 @@
 </head>
 <body>
 
-  <div class="hero_area">
+  <div class="hero_area" style="background-color: #2f3d4e;">
 
     <div class="hero_bg_box">
-      <div class="bg_img_box">
+      <!-- <div class="bg_img_box">
         <img src="images/hero-bg.png" alt="">
-      </div>
+      </div> -->
     </div>
 
     <!-- header section strats -->
@@ -62,27 +62,24 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
               <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="fhome.php">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html"> About</a>
+                <a class="nav-link" href="fpayment.php">My Pays</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="service.html">Services</a>
+                <a class="nav-link" href="freport.php">My Reports</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="why.html">Why Us</a>
+                <a class="btn1" href="fedit.php">Edit My details</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="team.html">Team</a>
+                <img src="images/fm.png" height="50px" width="50px" style="border-radius: 50px;"><!--***php code for name***-->
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
-              </li>
-              <form class="form-inline">
+              <!-- <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
+                </button> -->
               </form>
             </ul>
           </div>
