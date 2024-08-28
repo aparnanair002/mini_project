@@ -61,8 +61,14 @@ include("headlogin.php")
                       Sign Up
                     </h2>
                     <form action="post">
-                    <p style="size: 50px;">Username :<input type="text" name="p1">
-                   Password :<input type="password" name="p2"></p>
+                    <p style="size: 50px;">Name   :<input type="text" name="p1">
+                    Username :<input type="text" name="p2">
+                    Password :<input type="password" name="p3">
+                    Address :<input type="text" name="p4">
+                    Phone no :<input type="text" name="p5">
+                    Location :<input type="text" name="p6">
+                    Gender :<input type="radio" name="ctype" value="Female">Female
+                    <input type="radio" name="ctype" value="Male">Male</p>
                     <div class="btn-box" style="margin: left 235px;">
                       <a href="fhome.php" class="btn1">
                         Submit
