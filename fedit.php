@@ -57,7 +57,7 @@ include("headlogin.php")
                       Dairy  Direct
                     </h1>
                     <h2 style="color: white; font-family:Georgia, 'Times New Roman', Times, serif; margin-top: 30px;">
-                      Edit
+                      Edit Profile
                     </h2>
                     <form action="post">
                     <p style="size: 50px;">Name   :<input type="text" name="p1">
