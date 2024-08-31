@@ -40,8 +40,6 @@ https://www.tooplate.com/view/2121-wave-cafe
     
         <script src="script.js"></script>
     
-
-    
     </div>
     
     

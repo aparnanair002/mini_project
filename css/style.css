@@ -584,10 +584,10 @@ input[type=password] {
 
 .why_section .box .img-box {
   margin-bottom: 20px;
-  width: 120px;
-  height: 120px;
-  min-width: 120px;
-  min-height: 120px;
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  min-height: 100px;
   border-radius: 100%;
   border: 5px solid #00204a;
   display: -webkit-box;

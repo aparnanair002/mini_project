@@ -47,12 +47,15 @@ include("headlogin.php")
  <section class="slider_section " style="background-color: #2d3f4e;">
             <div class="container ">
                 <div class="row">
-                <div class="col-md-6">
-                 <div class="img-box">
+                <div class="col-md-5" >
+                 <div class="img-box" style="align-items:start;">
                     <img src="images/slider-img.png" alt="">
+
                   </div>
+                  <img src="images/tram.png" alt="" height="500px">
+
                 </div>
-                <div class="col-md-6 ">
+                <div class="col-md-7 ">
                   <div class="detail-box" style="margin-bottom: 155px;">
                     <h1 >
                       Dairy  Direct
@@ -61,15 +64,15 @@ include("headlogin.php")
                       Sign Up
                     </h2>
                     <form action="post">
-                    <p style="size: 50px;">Name   :<input type="text" name="p1">
-                    Username :<input type="text" name="p2">
-                    Password :<input type="password" name="p3">
-                    Address :<input type="text" name="p4">
-                    Phone no :<input type="text" name="p5">
-                    Location :<input type="text" name="p6">
-                    Gender :<input type="radio" name="ctype" value="Female">Female
-                    <input type="radio" name="ctype" value="Male">Male</p>
-                    <div class="btn-box" style="margin: left 235px;">
+                    <p style="size: 50px;">Name   :<input type="text" name="p1" style="margin-left:55px;"><br>
+                    Username :<input type="text" name="p2"><br>
+                    Password :<input type="password" name="p3" style="margin-left:25px;"><br>
+                    Address :<input type="text" name="p4" style="margin-left:35px;"><br>
+                    Phone no :<input type="text" name="p5"><br>
+                    Location :<input type="text" name="p6" style="margin-left:25px;"><br>
+                    Gender :<input type="radio" name="ctype" value="Female" style="margin-left: 50px;">Female
+                    <input type="radio" name="ctype" value="Male"  style="margin-left: 50px;">Male</p>
+                    <div class="btn-box" style="margin: left 235px; margin-top: 50px;">
                       <a href="fhome.php" class="btn1">
                         Submit
                       </a>
