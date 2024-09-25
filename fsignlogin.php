@@ -59,20 +59,22 @@ include("headlogin.php")
                     <h2 style="color: white; font-family:Georgia, 'Times New Roman', Times, serif; margin-top: 30px;">
                       Login
                     </h2>
-                    <form action="post">
+                    <form action="databases/fsignlogin.php" method="post">
                     <p style="size: 50px;">Username :<input type="text" name="p1">
                    Password :<input type="password" name="p2"></p>
                     <div class="btn-box" style="margin: left 235px;">
-                      <a href="fhome.php" class="btn1">
-                        Submit
-                      </a>
+                      <input type="submit" name="sub" value="Submit" class="btn1" style="width:160px; height:47px;">
                       <a href="fsignup.php" class="btn1">
                         Sign up
                       </a></div><div class="col-md-4" style="margin-top:25px">
                       <a href="fhome.php" class="btn1">
                         Forgot password?
                       </a></div>
-                      
+                      <?php
+    if (isset($_GET['error'])) {
+        echo "<h6 style='color:red; margin-top: 20px; text-align:center;'>Invalid username or password!!</h6>";
+    }
+    ?>
                     
                     </div>
                   </div></form>
