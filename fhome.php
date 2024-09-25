@@ -1,9 +1,24 @@
 <!DOCTYPE html>
 <html>
+  <head>
+<style>
+  .warn{
+    color:#E8FFB7; 
+  margin-top: 20px; 
+  text-align:left;
+  font-size: 25px;
+
+
+  }
+  
+</style></head>
 
 <?php
-include("head.php")
+include("head.php");
+session_start();
+$_SESSION['f_Id'];
 ?>
+<body>
 <!-- slider section -->
 <section class="slider_section ">
             <div class="container ">
@@ -13,21 +28,22 @@ include("head.php")
                     <h1 >
                       Dairy  Direct  Home
                     </h1>
-                    <form action="post">
+                    <form action="databases/fhome.php" method="post">
                     <br>
                     
-                    <select name="time" class="sel">
-                        <option value="AM">Morning</option>
-                            <option value="PM">Evening</option>
+                    <select name="time" class="sel" required>
+                      <option disabled selected value>--select--</option>
+                        <option value="0">Morning</option>
+                            <option value="1">Evening</option>
                         </select>    
                     
                     <br>
                     <p style="size: 100px;">Am I selling today ?  <br>   
-                    <input type="radio" id="y" name="option" value="Yes"> Yes <br>
-                    <input type="radio" id="n" name="option" value="No"> No
+                    <input type="radio" id="y" name="opt" value="Yes"> Yes <br>
+                    <input type="radio" id="n" name="opt" value="No"> No
                     </p>
                     <div class="btn-box" style="margin: left 235px;">
-                    <input type="submit" value="Done" name="submit" class="btn1">
+                    <input type="submit" value="Done" name="done" class="btn1">
 <br></form></div>
 <form name="payment">
                     <br>
@@ -36,7 +52,17 @@ include("head.php")
                     </label>
                       
                     </form>
-                   
+                    <?php
+    if (isset($_GET['done'])) {
+        echo "<h4 class='warn'>Successfully Entered !!</h4>";
+    }
+    if (isset($_GET['did'])) {
+      echo "<h4 class='warn'>Todays Entry already exists !!</h4>";
+  }
+  if (isset($_GET['error'])) {
+    echo "<h4 class='warn'>Not entered Successfully !!</h4>";
+}
+    ?>
                   </div>
                 </div>
                 <div class="col-md-6">
