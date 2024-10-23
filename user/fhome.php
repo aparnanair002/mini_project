@@ -14,8 +14,13 @@
 </style></head>
 
 <?php
-include("head.php");
+
 session_start();
+if (!isset($_SESSION['f_Id'])) {
+  header('Location: fsignlogin.php');
+  exit;
+}
+include("head.php");
 $_SESSION['f_Id'];
 ?>
 <body>
@@ -59,6 +64,9 @@ $_SESSION['f_Id'];
     if (isset($_GET['did'])) {
       echo "<h4 class='warn'>Todays Entry already exists !!</h4>";
   }
+  if (isset($_GET['eprir'])) {
+    echo "<script>alert('Details Edited!!')</script>";
+}
   if (isset($_GET['error'])) {
     echo "<h4 class='warn'>Not entered Successfully !!</h4>";
 }
