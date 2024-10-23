@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html>
+  <style>
+  .flex-container {
+    margin-top: 50px;
+    display: flex;               /* Enables flexbox layout */
+    justify-content: center;     /* Centers items horizontally */
+    align-items: center;         /* Centers items vertically */
+    background-color: white;  
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    color: red;               /* White text color */
+    font-size: 18px;           /* Font size of 20px */
+    padding: 15px;             /* Padding around the text */
+    border-radius: 5px;   /* Blue background */
+}
+</style>
 <?php
+session_start();
+if (!isset($_SESSION['f_Id'])) {
+  header('Location: fsignlogin.php');
+  exit;
+}
+
 include("headlogin.php")
 ?>
 <body>
@@ -72,8 +92,11 @@ include("headlogin.php")
                       </a></div>
                       <?php
     if (isset($_GET['error'])) {
-        echo "<h6 style='color:red; margin-top: 20px; text-align:center;'>Invalid username or password!!</h6>";
+        echo "<div  class='flex-container'>Invalid username or password!!</div>";
     }
+    if (isset($_GET['yes'])) {
+      echo "<div  class='flex-container'>You are yet to be authenticated by your society !!<br> Contact your respective society for further details!!</div>";
+  }
     ?>
                     
                     </div>
