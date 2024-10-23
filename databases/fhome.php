@@ -10,10 +10,10 @@ $dt=date('y-m-d');
 echo $dt;
 if($opt==='Yes')
 {
-    $s="select t_date,t_opt from tbl_todaysel where t_date='$dt'  and t_opt=$time and f_Id=$id";
+    $s="select t_date,t_opt from tbl_todaysel where t_date='$dt'  and t_opt='$time' and f_Id=$id";
     $st=mysqli_query($con,$s);
     if($st->num_rows ==0){
-        $sql="insert into tbl_todaysel (t_date,t_opt,f_Id) values ('$dt',$time,$id)";
+        $sql="insert into tbl_todaysel (t_date,t_opt,f_Id) values ('$dt','$time',$id)";
         $stm=mysqli_query($con,$sql);
 
         if ($stm){
