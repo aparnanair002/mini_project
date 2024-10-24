@@ -70,8 +70,7 @@
       <div class="container-fluid">
         <div class="container-fluid">
           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Milk collector validate</h5>
+            <div class="card-body">Type of milk </h5><br><br>
               
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>

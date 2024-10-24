@@ -71,7 +71,7 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Milk collector validate</h5>
+              <h5 class="card-title fw-semibold mb-4">Milk Price</h5>
               
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>

@@ -29,18 +29,18 @@
             </li>
             <li class="nav-item">
               <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                <i class="ti ti-bell-ringing"></i>
-                <div class="notification bg-primary rounded-circle"></div>
+                <!-- <i class="ti ti-bell-ringing"></i> -->
+                <!-- <div class="notification bg-primary rounded-circle"></div> -->
               </a>
             </li>
           </ul>
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-              <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">Download Free</a>
+              <!-- <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">Download Free</a> -->
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                  <!-- <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle"> -->
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
@@ -128,7 +128,7 @@
               </div>
               <div class="col-lg-12">
                 <!-- Monthly Earnings -->
-                <div class="card">
+                <!-- <div class="card">
                   <div class="card-body">
                     <div class="row alig n-items-start">
                       <div class="col-8">
@@ -222,8 +222,8 @@
                 </ul>
               </div>
             </div>
-          </div>
-          <div class="col-lg-8 d-flex align-items-stretch">
+          </div> -->
+          <!-- <div class="col-lg-8 d-flex align-items-stretch">
             <div class="card w-100">
               <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Recent Transactions</h5>
@@ -247,8 +247,8 @@
                           <h6 class="fw-semibold mb-0">Budget</h6>
                         </th>
                       </tr>
-                    </thead>
-                    <tbody>
+                    </thead> -->
+                    <!-- <tbody>
                       <tr>
                         <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
                         <td class="border-bottom-0">
@@ -266,8 +266,8 @@
                         <td class="border-bottom-0">
                           <h6 class="fw-semibold mb-0 fs-4">$3.9</h6>
                         </td>
-                      </tr> 
-                      <tr>
+                      </tr>  -->
+                      <!-- <tr>
                         <td class="border-bottom-0"><h6 class="fw-semibold mb-0">2</h6></td>
                         <td class="border-bottom-0">
                             <h6 class="fw-semibold mb-1">Andrew McDownland</h6>
@@ -326,8 +326,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> -->
+        <!-- </div>
         <div class="row">
           <div class="col-sm-6 col-xl-3">
             <div class="card overflow-hidden rounded-2">
@@ -368,8 +368,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6 col-xl-3">
+          </div> -->
+          <!-- <div class="col-sm-6 col-xl-3">
             <div class="card overflow-hidden rounded-2">
               <div class="position-relative">
                 <a href="javascript:void(0)"><img src="../assets/images/products/s7.jpg" class="card-img-top rounded-0" alt="..."></a>
@@ -415,7 +415,21 @@
         </div>
       </div>
 </div>
-  </div>
+  </div> -->
+  <div>
+    <a class="sidebar-link" href="./milk_price.php" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">Milk Price</span>
+              </a>
+              <a class="sidebar-link" href="./milk_type.php" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">type of milk</span>
+              </a>
+    </div>
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>
