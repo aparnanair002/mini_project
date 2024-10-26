@@ -52,6 +52,22 @@
               </a>
             </li>
             <li class="sidebar-item">
+              <a class="sidebar-link" href="./vmilk.php" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">View milk</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./vuser.php" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">View User</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
               <a class="sidebar-link" href="./V_all_collector.php" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-description"></i>

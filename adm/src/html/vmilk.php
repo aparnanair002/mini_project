@@ -71,14 +71,38 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4" style="margin-left:300px;" required>Milk collector validate</h5>
-              
-                    <button type="submit" class="btn btn-primary" style="margin-left:300px;" required>Submit</button>
+              <h5 class="card-title fw-semibold mb-4" style="margin-left:300px;" required> View milk </h5>
+
+              <form action="post" class="form-inline">
+          <div class="search-container">
+          
+            <input type="text" id="search-bar" placeholder="Search for your location" class="fas fa-search" style="margin-left: 800px;"><button onclick="searchFunction()"> </button>
+          </form>
+        </div>
+
+              <p style="size: 50px;"><select name='$name' style="margin-left:300px;" required>>";
+    foreach ($options as $value => $label) 
+        <option value='$value'>Today</option>
+        <option value='$value'>Weekly</option>
+        <option value='$value'>Month</option>
+        <option value='$value'>Year</option>
+    </select>
+    
+    
+    <p style="size: 50px;"><select name='$name' style="margin-left:300px;" required>>";
+    foreach ($options as $value => $label) 
+        <option value='$value'>sun-present day</option>
+        <option value='$value'>month- jan to current month</option>
+        <option value='$value'>year- 2010- current year</option>
+    </select><br><br>
+    
+    <button type="submit" class="btn btn-primary" style="margin-left:600px;" required>Submit</button><button type="submit" class="btn btn-primary" >Submit</button>
+                    
                   </form>
                 </div>
               </div>
               
-              
+ 
 
               <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

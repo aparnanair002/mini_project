@@ -416,20 +416,28 @@
       </div>
 </div>
   </div> -->
-  <div>
-    <a class="sidebar-link" href="./milk_price.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">Milk Price</span>
-              </a>
-              <a class="sidebar-link" href="./milk_type.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">type of milk</span>
-              </a>
-    </div>
+  <div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">Milk Price</h5>
+              
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+
+
+    <div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">Enter the milk type</h5>
+        <p style="size: 50px;"><input type="text" name="p1" placeholder="Milk Type" ><br><br>                  
+                    <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+              </div>
+    
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>
