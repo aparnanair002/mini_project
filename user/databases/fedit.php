@@ -1,7 +1,6 @@
 <?php
 
 include('connection.php');
-// Get the user ID from the session or query string
 session_start();
 $f_Id = $_SESSION['f_Id'];
 
@@ -14,27 +13,33 @@ if (empty($f_Id)) {
 // Get the form data
 $name = $_POST['p1'];
 $username = $_POST['p2'];
-$password = $_POST['p3'];
 $homeaddress = $_POST['p4'];
 $phone_no = $_POST['p5'];
 $location_society = $_POST['p6'];
 $gender = $_POST['ctype'];
 
 // Validate the form data
-if (empty($name) || empty($username) || empty($password) || empty($homeaddress) || empty($phone_no) || empty($location_society) || empty($gender)) {
+if (empty($name) || empty($username) || empty($homeaddress) || empty($phone_no) || empty($location_society) || empty($gender)) {
     header("Location: ../fedit.php?error=1");
     exit;
 }
 
-// Update the user profile in the database
-$sql = "UPDATE tbl_dairyf SET f_name = '$name', f_username = '$username', f_password = '$password', f_homeaddress = '$homeaddress', phone_no = '$phone_no', location_society= '$location_society', gender= '$gender' WHERE f_Id = '$f_Id'";
+// Prepare the SQL statement
+$stmt = $con->prepare("UPDATE tbl_dairyf SET f_name = ?, f_username = ?, f_homeaddress = ?, phone_no = ?, location_society = ?, gender = ?, f_status = 0 WHERE f_Id = ?");
 
-if (mysqli_query($con, $sql)) {
-    header("Location: ../fhome.php?eprir=1");
+// Bind parameters
+$stmt->bind_param("ssssssi", $name, $username, $homeaddress, $phone_no, $location_society, $gender, $f_Id);
+
+// Execute the statement
+if ($stmt->execute()) {
+    header("Location: ../fsignlogin.php");
 } else {
-    header("Location: ../fedit.php?error=1");
+    // Redirect with the error message
+    $error_message = urlencode($stmt->error);
+    header("Location: ../fedit.php?error=$error_message");
 }
 
-// Close the database conection
+// Close the statement and database connection
+$stmt->close();
 mysqli_close($con);
 ?>
