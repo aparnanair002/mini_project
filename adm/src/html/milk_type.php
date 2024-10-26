@@ -67,16 +67,28 @@
         </nav>
       </header>
       <!--  Header End -->
-      <div class="container-fluid">
+      
+              <div class="container-fluid">
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Report</h5>
+              <h5 class="card-title fw-semibold mb-4" style="margin-left:300px;" required>Enter the milk type</h5>
               
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-                </div>
+             
+        
+        
+        <p style="size: 50px;"><input type="text" name="p1" placeholder="Milk Type" style="margin-left:300px;" required><br><br>
+                    
+    
+
+                    <button type="submit" class="btn btn-primary"style="margin-left:300px;" required>Submit</button>
               </div>
+              </div>
+              
+              
+                    
+                    
+
               <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>

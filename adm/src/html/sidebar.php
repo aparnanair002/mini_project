@@ -40,7 +40,7 @@
                 <span>
                   <i class="ti ti-file-description"></i>
                 </span>
-                <span class="hide-menu">Milk collector Validation</span>
+                <span class="hide-menu">Milk collector Validate</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -48,7 +48,23 @@
                 <span>
                   <i class="ti ti-file-description"></i>
                 </span>
-                <span class="hide-menu">Milk Edit</span>
+                <span class="hide-menu">Milk Validate</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./vmilk.php" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">View milk</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./vuser.php" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">View User</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -60,19 +76,19 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./logout.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">logout</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
               <a class="sidebar-link" href="report.php" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-description"></i>
                 </span>
                 <span class="hide-menu">Report</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="./logout.php" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">logout</span>
               </a>
             </li>
             <!-- <li class="nav-small-cap">
