@@ -78,21 +78,7 @@ include("headlogin.php")
                     <mn id="message" style="font: size 20px; color:red;"></mn><br>
                     Address :<input type="text" name="p4" style="margin-left:35px;" placeholder="Address" required><br>
                     Phone no :<input type="text" name="p5" id="mobile" placeholder="Phone Number" oninput="return validateMobileNumber()"><br>
-                     <script>
-        function validateMobileNumber() {
-            var mobileNumber = document.getElementById("mobile").value;
-            
-            // Regular expression to check if the input is exactly 10 digits
-            var regex = /^\d{10}$/;
-            
-            if (!regex.test(mobileNumber)) {
-                newl.textContent="Mobile Number should be 10 digits!!"
-                return false; // Prevent form submission
-            }
-            
-            return true; // Allow form submission
-        }
-    </script>
+                    
                     <mn id="newl" style="font: size 20px; color:red;"></mn><br>
                     Location :
                     <select name="p6" id="p6" style="width: 450px; height:50px; margin-left:20px;">
@@ -120,8 +106,8 @@ include("headlogin.php")
                     <input type="radio" name="ctype" value="Male"  style="margin-left: 50px;">Male</p>
                     <div class="btn-box" style="margin: left 235px; margin-top: 50px;">
                     <input type="submit" value="       Sign up         " name="submit" class="btn1">
-                    <input type="submit" value="       Login     " name="login" class="btn1"></div><div class="col-md-4" style="margin-top:25px">
-                      <a href="fhome.php" class="btn1">
+                    <button class="btn1"><a href="fsignlogin.php" style="color: #2d3f4e; text-decoration: none;">  &nbsp; &nbsp;   Login  &nbsp;  &nbsp; </a></button></div><div class="col-md-4" style="margin-top:25px">
+                      <a href="fhome.php">
                         Forgot password?
                       </a></div>
                      
@@ -135,7 +121,38 @@ include("headlogin.php")
                 message.textContent = "Passwords do not match!";
             }
         });
-    </script>
+        
+    // Function to validate the mobile number
+    function validateMobileNumber() {
+        var mobileInput = document.getElementById('mobile');
+        var message = document.getElementById('newl');
+        var pattern = /^[0-9]{10}$/; // Pattern for a 10-digit mobile number
+        var submitBtn = document.getElementById('submitBtn'); // Get the submit button
+
+        if (!pattern.test(mobileInput.value)) {
+            message.textContent = "Please enter a valid mobile number (10 digits).";
+            mobileInput.style.borderColor = "red"; // Highlight the input
+            submitBtn.disabled = true; // Disable the submit button
+            return false;
+        } else {
+            message.textContent = ""; // Clear the message if valid
+            mobileInput.style.borderColor = ""; // Reset the border color
+            submitBtn.disabled = false; // Enable the submit button
+            return true;
+        }
+    }
+
+    // Add event listener to the mobile input to validate on input
+    document.getElementById('mobile').addEventListener('input', validateMobileNumber);
+
+    // Optional: Validate the mobile number when the form is submitted
+    document.getElementById('editForm').addEventListener('submit', function(event) {
+        if (!validateMobileNumber()) {
+            event.preventDefault(); // Prevent form submission if invalid
+        }
+    });
+</script>
+    
    
     </div>
                   </div></form>
