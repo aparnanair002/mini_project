@@ -1,10 +1,21 @@
 <!doctype html>
 <html lang="en">
+<?php
 
+// session_start();
+// if (!isset($_SESSION['a_Id'])) {
+//   header('Location: fsignlogin.php');
+//   exit;
+// }
+
+include("../databases/connection.php");
+
+
+?>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
+  <title>Admin-Diarydiary</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
@@ -68,12 +79,79 @@
       </header>
       <!--  Header End -->
       <div class="container-fluid">
-        <div class="container-fluid">
+        
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">User validate</h5>
+              <h5 class="card-title fw-semibold mb-4">Validate Farmer</h5>
+              <div class="table-responsive">
+                  <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4">
+                      <tr>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">S.Id</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Name</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Gender</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Address</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Location</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Phone number</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Accept</h6>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     <?php
+                     $stmt = $con->prepare("SELECT f_Id,f_name,f_homeaddress,phone_no,location_society,gender,f_status FROM tbl_dairyf WHERE f_status = 0 "); //"and location_society=$loc_id"
+                     $stmt->execute();
+
+                          // Get the result
+                          $result = $stmt->get_result();
+                     if ($result->num_rows > 0) {
+                      $id = 1; // To keep track of the ID for display
+                      while ($row = $result->fetch_assoc()) {
+                          // Display each row in the table
+                          echo '<tr>';
+                          echo '<td class="border-bottom-0"><h6 class="fw-semibold mb-0">' . $id . '</h6></td>';
+                          echo '<td class="border-bottom-0">';
+                          echo '<h6 class="fw-semibold mb-1">' . htmlspecialchars($row['f_name']) . '</h6>';
+                          echo '</td>';
+                          echo '<td class="border-bottom-0"><p class="mb-0 fw-normal">' . htmlspecialchars($row['gender']) . '</p></td>';
+                          echo '<td class="border-bottom-0"><p class="mb-0 fw-normal">'.htmlspecialchars($row['f_homeaddress']) . '</p></td>';
+                          echo '<td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">' . htmlspecialchars($row['location_society']) . '</h6></td>';
+                          echo '<td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">' . htmlspecialchars($row['phone_no']) . '</h6></td>';
+                          echo '<td class="border-bottom-0"><form method="POST" action="../databases/accept_user.php">';
+                          echo '<input type="hidden" name="user_id" value="' . $row['f_Id'] . '">'; // Assuming you have an ID column
+                          echo '<button type="submit" class="btn btn-success">Accept</button>';
+                          echo '</form></td>';
+                          echo '</tr>';
+                          $id++; // Increment the ID for the next row
+                      }
+                  } else {
+                      echo '<tr><td colspan="7" class="text-center">No results found.</td></tr>';
+                  }
+                     ?>
+                                      
+                    </tbody>
+                  </table>
+                
+                
+                </div>
               
-                    <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+              
+                    
                   </form>
                 </div>
               </div>
