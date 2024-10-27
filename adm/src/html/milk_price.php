@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
+  <title>Admin-Diarydiary</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
@@ -72,7 +72,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title fw-semibold mb-4">Milk Price</h5>
-              
+              <p style="size: 50px;"><input type="text" name="p1" placeholder="Milk Type" style="margin-left:300px;" required><br><br>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
                 </div>

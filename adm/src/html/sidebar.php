@@ -1,196 +1,215 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Example</title>
+    <style>  
+/* .sidebar-sublist ::before{
+  display: none;
+}
+.sidebar-sublist ::after {
+    display: block; /* Ensure the sublist is always visible 
+    list-style: none;
+    padding-left: 15px; /* Indent sublist
+    margin: 0; /* Remove default margin 
+}    */
 
- <!-- Sidebar Start -->
- <aside class="left-sidebar">
-      <!-- Sidebar scroll-->
-      <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.php" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/dark-logo.svg" width="250" alt="" />
-          </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-8"></i>
-          </div>
-        </div>
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-          <ul id="sidebarnav">
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">Home</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                <span class="hide-menu">Dashboard</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./validate.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">User Validate</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./Mcollector_validate.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">Milk collector Validate</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./milk_edit.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">Milk Validate</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./vmilk.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">View milk</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./vuser.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">View User</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./V_all_collector.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">View all collector</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="report.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">Report</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./logout.php" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">logout</span>
-              </a>
-            </li>
-            <!-- <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">UI COMPONENTS</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-article"></i>
-                </span>
-                <span class="hide-menu">Buttons</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-alert-circle"></i>
-                </span>
-                <span class="hide-menu">Alerts</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-cards"></i>
-                </span>
-                <span class="hide-menu">Card</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">Forms</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-typography"></i>
-                </span>
-                <span class="hide-menu">Typography</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">AUTH</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-login"></i>
-                </span>
-                <span class="hide-menu">Login</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user-plus"></i>
-                </span>
-                <span class="hide-menu">Register</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">EXTRA</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-mood-happy"></i>
-                </span>
-                <span class="hide-menu">Icons</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-aperture"></i>
-                </span>
-                <span class="hide-menu">Sample Page</span>
-              </a>
-            </li>
-          </ul>
-          <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
-            <div class="d-flex">
-              <div class="unlimited-access-title me-3">
-                <h6 class="fw-semibold fs-4 mb-6 text-dark w-85">Upgrade to pro</h6>
-                <a href="https://adminmart.com/product/modernize-bootstrap-5-admin-template/" target="_blank" class="btn btn-primary fs-2 fw-semibold lh-sm">Buy Pro</a>
-              </div>
-              <div class="unlimited-access-img">
-                <img src="../assets/images/backgrounds/rocket.png" alt="" class="img-fluid">
-              </div>
+        .sidebar-item {
+            position: relative;
+        }
+
+        /* Sidebar link */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333; /* Change this to your desired text color */
+            transition: background-color 0.3s;
+        }
+
+ 
+        /* Hover effect for sidebar link */
+        .sidebar-link:hover {
+            background-color: #f0f0f0; /* Change to desired hover color */
+        }
+
+        /* Subitem link */
+        .sidebar-sublink {
+            display: block;
+          
+            padding: 8px 10px;
+            text-decoration: none;
+            color: #333; /* Change this to your desired sub-item text color */
+            transition: background-color 0.3s;
+        }
+
+        /* Hover effect for sub-item link */
+        .sidebar-sublink:hover {
+            background-color: #e0e0e0; /* Change to desired hover color for sub-items */
+        }
+    </style>
+
+      
+</head>
+<body>
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div>
+            <div class="brand-logo d-flex align-items-center justify-content-between">
+                <a href="./index.php" class="text-nowrap logo-img">
+                    <img src="../assets/images/logos/dark-logo.svg" width="250" alt="" />
+                </a>
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
             </div>
-          </div> -->
-        </nav>
-        <!-- End Sidebar navigation -->
-      </div>
-      <!-- End Sidebar scroll-->
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                <ul id="sidebarnav">
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Home</span>
+                    </li>
+                    <li class="sidebar-item active">
+                  <a class="sidebar-sublink" href="./index.php" aria-expanded="false">
+                      <span>
+                          <i class="ti ti-layout-dashboard"></i>
+                      </span>
+                      
+                      <span class="hide-menu" style="margin-left:20px">Dashboard</span>
+                  </a>
+                  </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-list"></i>
+                            </span>
+                            <span class="hide-menu">Dairy Farmer</span>
+                            <span>
+                                <i class="ti ti-arrow-down"></i>
+                            </span>
+                        </a>
+                        <ul class="sidebar-sublist">
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./vuser.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style="margin-left: 20px; margin-bottom: 20px;">View Farmer</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./validate.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style="margin-left: 20px; margin-bottom: 20px;">Validate Farmer</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./report.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style="margin-left: 20px; margin-bottom: 20px;">Report</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item">
+                    <a class="sidebar-link" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-list"></i>
+                            </span>
+                            <span class="hide-menu">Milk Collector</span>
+                            <span>
+                                <i class="ti ti-arrow-down"></i>
+                            </span>
+                        </a>
+                      
+                        <ul class="sidebar-sublist">
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./v_all_collector.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">View</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./Mcollector_validate.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Validate Milk Collector</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                       
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-list"></i>
+                            </span>
+                            <span class="hide-menu">Milk</span>
+                            <span>
+                                <i class="ti ti-arrow-down"></i>
+                            </span>
+                        </a>
+                        <ul class="sidebar-sublist">
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./milk_edit.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Milk Edit</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./vmilk.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Validate Milk Collected</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./milk_report.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Report of Milk</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="./logout.php" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-logout"></i>
+                            </span>
+                            <span class="hide-menu">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
     </aside>
-    <!--  Sidebar End -->
+    <!-- Sidebar End -->
+    <script>
+    // Hide all sublists on page load
+    document.querySelectorAll('.sidebar-sublist').forEach(sublist => {
+        sublist.style.display = 'none';
+    });
+
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor click behavior
+
+            // Get the parent item
+            const parentItem = this.parentElement;
+            const submenu = parentItem.querySelector('.sidebar-sublist');
+
+            // Toggle the display of the submenu
+            if (submenu) {
+                // Check if the submenu is currently displayed
+                const isDisplayed = submenu.style.display === 'block';
+                
+                // Hide all other sublists
+                document.querySelectorAll('.sidebar-sublist').forEach(sub => {
+                    sub.style.display = 'none';
+                });
+
+                // If it was not displayed, show it
+                submenu.style.display = isDisplayed ? 'none' : 'block';
+            }
+        });
+    });
+</script>
+
+</body>
 </html>
