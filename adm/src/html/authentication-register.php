@@ -30,35 +30,38 @@ include "../databases/connection.php";
 
                 
                 <p class="text-center">Your Social Campaigns</p>
-                <form method="post" action="../databases/register.php">
+                <form method="post" action="../databases/register.php" id="signupForm">
                   <div class="mb-3">
                     <label for="exampleInputtext1" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="exampleInputtext1" aria-describedby="textHelp">
+                    <input type="text" class="form-control" name="p1" id="exampleInputtext1" aria-describedby="textHelp">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">User Name</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" name="p2" id="exampleInputEmail1" aria-describedby="emailHelp">
                   </div>
                   <div class="mb-4">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="password" class="form-control" name="p3" id="exampleInputPassword1">
                   </div>
                   <div class="mb-4">
-                    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword2">
+                    <mn id="message" style="font: size 20px; color:red;"></mn><br>
                   </div>
                   <div class="mb-4">
-                    <label for="exampleInputPassword1" class="form-label">Address</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" name="p5" id="address">
                   </div>
                   <div class="mb-4">
-                    <label for="exampleInputPassword1" class="form-label">Phone Number</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="phn" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" name="p6" id="mobile">
+                    <mn id="newl" style="font: size 20px; color:red;"></mn><br>
+
                   </div>
                   <div>
                   
-                  <label for="exampleInputPassword1" class="form-label">Location</label>
-<select class="form-control" id="exampleInputPassword1">
+                  <label for="location" class="form-label">Location</label>
+<select class="form-control" id="location" name="p7">
   <option disabled selected value>---select an option---&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</option>
   <?php  
   $sql = "SELECT loc_name FROM tbl_location order by loc_name ASC ";  // Replace 'locations' with your table name and 'name' with your column name
@@ -76,9 +79,17 @@ include "../databases/connection.php";
   ?>
   
 </select>
-<mn id="newl" style="font: size 20px; color:red;"></mn><br>
-
+<br><br>
 <input type="submit" class="btn btn-primary" style="margin-left:100px;" value="Sign Up" name="Submit">
+<br><br>
+ <?php
+                      if (isset($_GET['error'])) {
+                        $error_message = htmlspecialchars($_GET['error']); // Sanitize the output
+                        echo "<br><h3 style='color:red; font-size:20px; text-align:center;'>$error_message</h3><br>"; // Display the error message
+                    }
+
+                 ?>
+                 
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
                     <a class="text-primary fw-bold ms-2" href="./authentication-login.php">Sign In</a>
@@ -92,7 +103,47 @@ include "../databases/connection.php";
     </div>
   </div>
 
+  <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            var password = document.getElementById('exampleInputPassword1').value;
+            var confirmPassword = document.getElementById('exampleInputPassword2').value;
+            var message = document.getElementById('message');
+            if (password !== confirmPassword) {
+                event.preventDefault();
+                message.textContent = "Passwords do not match!";
+            }
+        });
+        
+    // Function to validate the mobile number
+    function validateMobileNumber() {
+        var mobileInput = document.getElementById('mobile');
+        var message = document.getElementById('newl');
+        var pattern = /^[0-9]{10}$/; // Pattern for a 10-digit mobile number
+        var submitBtn = document.getElementById('submitBtn'); // Get the submit button
 
+        if (!pattern.test(mobileInput.value)) {
+            message.textContent = "Please enter a valid mobile number (10 digits).";
+            mobileInput.style.borderColor = "red"; // Highlight the input
+            submitBtn.disabled = true; // Disable the submit button
+            return false;
+        } else {
+            message.textContent = ""; // Clear the message if valid
+            mobileInput.style.borderColor = ""; // Reset the border color
+            submitBtn.disabled = false; // Enable the submit button
+            return true;
+        }
+    }
+
+    // Add event listener to the mobile input to validate on input
+    document.getElementById('mobile').addEventListener('input', validateMobileNumber);
+
+    // Optional: Validate the mobile number when the form is submitted
+    document.getElementById('editForm').addEventListener('submit', function(event) {
+        if (!validateMobileNumber()) {
+            event.preventDefault(); // Prevent form submission if invalid
+        }
+    });
+</script>
 
   
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
