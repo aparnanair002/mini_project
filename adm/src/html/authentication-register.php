@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
+<?php
+include "../databases/connection.php";
 
+?>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,24 +26,62 @@
                 <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
                   <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
                 </a>
+
+
+                
                 <p class="text-center">Your Social Campaigns</p>
-                <form>
+                <form method="post" action="../databases/register.php">
                   <div class="mb-3">
                     <label for="exampleInputtext1" class="form-label">Name</label>
                     <input type="text" class="form-control" id="exampleInputtext1" aria-describedby="textHelp">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email Address</label>
+                    <label for="exampleInputEmail1" class="form-label">User Name</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                   </div>
                   <div class="mb-4">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" class="form-control" id="exampleInputPassword1">
                   </div>
-                  <a href="./index.html" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</a>
+                  <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label">Address</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div>
+                  
+                  <label for="exampleInputPassword1" class="form-label">Location</label>
+<select class="form-control" id="exampleInputPassword1">
+  <option disabled selected value>---select an option---&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</option>
+  <?php  
+  $sql = "SELECT loc_name FROM tbl_location order by loc_name ASC ";  // Replace 'locations' with your table name and 'name' with your column name
+  $result = mysqli_query($con,$sql);
+  // Check if there are results
+  if (mysqli_num_rows($result)>0) {
+    // Fetch each row and display in the dropdown
+    while ($row = mysqli_fetch_array($result)) {
+      echo "<option value='" . $row["loc_name"] . "'>" . $row["loc_name"] . "</option>";
+    }
+  } else {
+    echo "<option value=''>No locations found.</option>";
+  }
+  mysqli_close($con);
+  ?>
+  
+</select>
+<mn id="newl" style="font: size 20px; color:red;"></mn><br>
+
+<input type="submit" class="btn btn-primary" style="margin-left:100px;" value="Sign Up" name="Submit">
                   <div class="d-flex align-items-center justify-content-center">
                     <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
-                    <a class="text-primary fw-bold ms-2" href="./authentication-login.html">Sign In</a>
+                    <a class="text-primary fw-bold ms-2" href="./authentication-login.php">Sign In</a>
                   </div>
                 </form>
               </div>
@@ -50,6 +91,10 @@
       </div>
     </div>
   </div>
+
+
+
+  
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
