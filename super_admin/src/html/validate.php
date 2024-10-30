@@ -82,7 +82,7 @@ include("../databases/connection.php");
         
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Validate Farmer</h5>
+              <h5 class="card-title fw-semibold mb-4">Validate Society</h5>
               <div class="table-responsive">
                   <table class="table text-nowrap mb-0 align-middle">
                     <thead class="text-dark fs-4">

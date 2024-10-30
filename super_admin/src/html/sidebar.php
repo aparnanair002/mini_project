@@ -82,32 +82,35 @@
                       <span class="hide-menu" style="margin-left:20px">Dashboard</span>
                   </a>
                   </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./validate.php" aria-expanded="false">
-                            <span>
-                                <i class="ti ti-list"></i>
-                            </span>
-                            <span class="hide-menu">View  Society  Admins</span>
-                        </a>
-                        
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./location_add.php" aria-expanded="false">
-                            <span>
-                                <i class="ti ti-list"></i>
-                            </span>
-                            <span class="hide-menu">Add Locations</span>
-                        </a>
-                        
-                    </li>
+                  <li class="sidebar-item">
+    <a class="sidebar-sublink"  href="./validate.php">
+  
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Add Society</span>
+                                </a>
+                      
+</li>
+<li class="sidebar-item">
+    <a class="sidebar-sublink"  href="./view.php">
+  
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">View Society</span>
+                                </a>
+                      
+</li>
+<li class="sidebar-item">
+
+                                <a class="sidebar-sublink" href="./location_add.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Location Add</span>
+                                </a>
+                      
+</li>
 
                     
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./logout.php" aria-expanded="false">
+                        <a class="sidebar-sublink" href="../../../user/index.php" aria-expanded="false">
                             <span>
                                 <i class="ti ti-logout"></i>
                             </span>
-                            <span class="hide-menu">Logout</span>
+                            <span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Logout</span>
                         </a>
                     </li>
                 </ul>
