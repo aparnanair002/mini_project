@@ -74,14 +74,19 @@
             <div class="card-body">
               <h5 class="card-title fw-semibold mb-4" style="margin-left:300px;margin-bottom:100px" required>Add Location</h5>
               
-             <form>
+              <form action="../databases/location.php" method="post">
+
               <p style="size: 100px;">
-        Location:  <input type="text" id="location" name="location" placeholder="Enter Location" style="margin-left:30px;margin-top:50px;width: 500px;height:50px" required>
+        admin id:  <input type="text" id="admin id" name="p2" placeholder="Name Of Admin" style="margin-left:30px;margin-top:50px;width: 500px;height:50px" required>
+        <br></p>
+
+              <p style="size: 100px;">
+        Location:  <input type="text" id="location" name="p3" placeholder="Enter Location" style="margin-left:30px;margin-top:50px;width: 500px;height:50px" required>
         <br><br></p>
                     
-    
+        
 
-                    <input type="submit" class="btn btn-primary"style="margin-left:300px;" name="submit"  required>
+                    <input type="submit" class="btn btn-primary"style="margin-left:300px;" name="Submit"  required>
               </div>
               </div>
 </form>
