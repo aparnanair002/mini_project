@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_POST['user_id'];
 
     // Prepare and bind the SQL statement to update the status
-    $stmt = $con->prepare("UPDATE tbl_dairyf SET f_status = 1 WHERE f_Id = ?");
+    $stmt = $con->prepare("UPDATE tbl_society SET s_status = 1 WHERE s_Id = ?");
     $stmt->bind_param("i", $user_id);
 
     // Execute the statement
