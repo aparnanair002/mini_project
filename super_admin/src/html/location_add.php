@@ -77,12 +77,16 @@
               <form action="../databases/location.php" method="post">
 
               <p style="size: 100px;">
+<<<<<<< HEAD
         admin id:  <input type="text" id="admin id" name="p2" placeholder="Name Of Admin" style="margin-left:30px;margin-top:50px;width: 500px;height:50px" required>
         <br></p>
 
               <p style="size: 100px;">
         Location:  <input type="text" id=".
         location" name="p3" placeholder="Enter Location" style="margin-left:30px;margin-top:50px;width: 500px;height:50px" required>
+=======
+        Location:  <input type="text" id="location" name="p3" placeholder="Enter Location" style="margin-left:30px;margin-top:50px;width: 500px;height:50px" required>
+>>>>>>> be827e788e99e03177736ff9ce6fe7034a2a03df
         <br><br></p>
                     
         
@@ -90,7 +94,55 @@
                     <input type="submit" class="btn btn-primary"style="margin-left:300px;" name="Submit"  required>
               </div>
               </div>
-</form>
+</form></div>
+
+<div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4" style="margin-left:300px;margin-bottom:100px" required>View Location</h5>
+              <table  class="table table-striped table-bordered" style="width: 1000px;">
+
+        <tr>
+            <th>Location ID</th>
+            <th>Location Name</th>
+            <th>Action</th>
+        </tr>
+        <?php
+          include('../databases/connection.php');
+        // Check connection
+        if ($con->connect_error) {
+            die("Connection failed: " . $con->connect_error);
+        }
+        
+        // Handle deletion
+        if (isset($_GET['delete'])) {
+            $loc_id = intval($_GET['delete']);
+            $delete_query = "DELETE FROM tbl_location WHERE loc_id = $loc_id";
+            $con->query($delete_query);
+        }
+        
+        // Fetch all locations
+        $sql = "SELECT loc_id,loc_name FROM tbl_location order by loc_name ASC";
+        $result = $con->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>
+                        <td>{$row['loc_id']}</td>
+                        <td>{$row['loc_name']}</td>
+                        <td><button class='btn btn-danger'><a href='?delete={$row['loc_id']}'  style='color:white;' onclick='return confirm(\"Are you sure you want to delete this location?\");'>Delete</a></button></td>
+                    </tr>";
+            }
+        } else {
+            echo "<tr><td colspan='3'>No locations found</td></tr>";
+        }
+        ?>
+    </table>
+              </div>
+          </div>
+
+
+</div></body>
               
                     
                     

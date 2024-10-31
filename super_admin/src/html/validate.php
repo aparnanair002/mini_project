@@ -112,8 +112,12 @@ include("../databases/connection.php");
                     </thead>
                     <tbody>
                      <?php
-                     $stmt = $con->prepare("SELECT s_Id,s_name,s_username,s_homeaddress,phone_no,location_society,s_status FROM tbl_society WHERE s_status = 0 "); //"and location_society=$loc_id"
-                     $stmt->execute();
+                     $stmt = $con->prepare("SELECT s.s_Id, s.s_name, s.s_username, s.s_homeaddress, s.phone_no, 
+           l.loc_name AS location_society, s.s_status 
+    FROM tbl_society s
+    JOIN tbl_location l ON s.location_society = l.loc_id 
+    WHERE s.s_status = 0");
+    $stmt->execute();
 
                           // Get the result
                           $result = $stmt->get_result();

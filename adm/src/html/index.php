@@ -119,6 +119,22 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="milkprice2" method="post" action="">
+                            <h5 class="card-title fw-semibold mb-4">Milk Sold Today</h5>
+                            <input type="text" name="p2" placeholder="Milk Sold Today" style="font-size: 20px;"><br><br>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
         
              

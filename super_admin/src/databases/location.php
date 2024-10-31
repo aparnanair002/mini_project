@@ -7,8 +7,7 @@ if (!$con) {
 }
 
 if (isset($_POST["Submit"])) {
-   
-    $aid = $_POST["p2"];
+
     $lname = $_POST["p3"];
 
     // Check if the location name already exists
@@ -17,12 +16,12 @@ if (isset($_POST["Submit"])) {
 
     if ($sel && $sel->num_rows == 0) {
         // Prepare the insert statement
-        $sq = "INSERT INTO tbl_location (adm_id, loc_name) VALUES ('$aid', '$lname')";
+        $sq = "INSERT INTO tbl_location (loc_name) VALUES ('$lname')";
         
         $result = mysqli_query($con, $sq);
 
         if ($result) {
-            $message = "Admin added Successfully !!";
+            $message = "Location added Successfully !!";
             header('Location: ../html/location_add.php?error=' . urlencode($message));
             exit();
         } else {
