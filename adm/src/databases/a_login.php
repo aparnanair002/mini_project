@@ -7,7 +7,7 @@ if (isset($_POST["sub"])) {
     $pas = $_POST["p2"];
 
     // Prepare the SQL statement to prevent SQL injection
-    $sqse = "SELECT  s_Id,s_username, s_password, s_status FROM tbl_society WHERE s_username=? AND s_password=?";
+    $sqse = "SELECT s_Id, s_username, s_password, s_status FROM tbl_society WHERE s_username=?  AND s_password=?";
     $stmt = $con->prepare($sqse);
     $stmt->bind_param("ss", $usr, $pas);
     $stmt->execute();
@@ -16,17 +16,21 @@ if (isset($_POST["sub"])) {
     // Check if any rows were returned
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc(); // Fetch the result as an associative array
-        if ($row['s_status'] == 1) {
-             $_SESSION['s_Id'] = $row['s_Id'];
-            header("Location: ../index.php");
-            exit();
-        } else {
-            header("Location: ../authentication-login.php?yes=1");
-            exit();
-        }
+        
+        // Verify the password
+       
+            if ($row['s_status'] == 1) {
+                $_SESSION['s_Id'] = $row['s_Id'];
+                header("Location: ../html/index.php");
+                exit();
+            } else {
+                header("Location: ../html/authentication-login.php?status=inactive");
+                exit();
+            }
+        
     } else {
         // No matching user found
-        header("Location: ../authentication-login.php?error=1");
+        header("Location: ../html/authentication-login.php?error=user_not_found");
         exit();
     }
 

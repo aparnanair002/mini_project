@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="en">
 <?php
+session_start();
+if (!isset($_SESSION['s_Id'])) {
+  header('Location: authentication-login.php');
+  exit;
+}
 
-// session_start();
-// if (!isset($_SESSION['a_Id'])) {
-//   header('Location: fsignlogin.php');
-//   exit;
-// }
+
+
 
 include("../databases/connection.php");
 
