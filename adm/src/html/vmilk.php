@@ -15,8 +15,14 @@
     data-sidebar-position="fixed" data-header-position="fixed">
     <!-- Sidebar Start -->
     <?php
-    include('sidebar.php');
-    ?>
+session_start();
+if (!isset($_SESSION['s_Id'])) {
+  header('Location: authentication-login.php');
+  exit;
+}
+
+include("sidebar.php")
+?> 
      
     <!--  Main wrapper -->
     <div class="body-wrapper">

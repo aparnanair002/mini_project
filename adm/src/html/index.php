@@ -12,10 +12,15 @@
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
-   <?php
-   include('sidebar.php');
-   ?>
-    <!--  Main wrapper -->
+    <?php
+session_start();
+if (!isset($_SESSION['s_Id'])) {
+  header('Location: authentication-login.php');
+  exit;
+}
+
+include("sidebar.php")
+?>  
     <div class="body-wrapper">
       <!--  Header Start -->
       <header class="app-header">
@@ -50,12 +55,12 @@
                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-mail fs-6"></i>
                       <p class="mb-0 fs-3">My Account</p>
-                    </a>
+                    </a>  
                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Task</p>
+                      <p class="mb-0 fs-3"><?php echo $_SESSION['s_Id']?></p>
                     </a>
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <a href="./authentication-login.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div> -->
               </li>
