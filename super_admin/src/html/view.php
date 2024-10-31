@@ -106,13 +106,20 @@ include("../databases/connection.php");
                           <h6 class="fw-semibold mb-0">Phone number</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">Accept</h6>
+                          <h6 class="fw-semibold mb-0">Reject</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Delete</h6>
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                      <?php
-                     $stmt = $con->prepare("SELECT s_Id,s_name,s_username,s_homeaddress,phone_no,location_society,s_status FROM tbl_society WHERE s_status = 1 "); //"and location_society=$loc_id"
+                     $stmt = $con->prepare("SELECT s.s_Id, s.s_name, s.s_username, s.s_homeaddress, s.phone_no, 
+           l.loc_name AS location_society, s.s_status 
+    FROM tbl_society s
+    JOIN tbl_location l ON s.location_society = l.loc_id 
+    WHERE s.s_status = 1");
                      $stmt->execute();
 
                           // Get the result
@@ -132,7 +139,11 @@ include("../databases/connection.php");
                           echo '<td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">' . htmlspecialchars($row['phone_no']) . '</h6></td>';
                           echo '<td class="border-bottom-0"><form method="POST" action="../databases/reject_user.php">';
                           echo '<input type="hidden" name="user_id" value="' . $row['s_Id'] . '">'; // Assuming you have an ID column
-                          echo '<button type="submit" class="btn btn-success">Reject</button>';
+                          echo '<button type="submit" class="btn btn-dark">Reject</button>';
+                          echo '</form></td>';
+                          echo '<td class="border-bottom-0"><form method="POST" action="../databases/delete_society.php">';
+                          echo '<input type="hidden" name="user_id" value="' . $row['s_Id'] . '">'; // Assuming you have an ID column
+                          echo '<button type="submit" class="btn btn-danger">Delete</button>';
                           echo '</form></td>';
                           echo '</tr>';
                           $id++; // Increment the ID for the next row
