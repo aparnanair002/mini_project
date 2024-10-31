@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->execute()) {
        
         echo "<script>
-        window.location.href = '../html/vuser.php'; // Redirect to validate.php
+        window.location.href = '../html/view.php'; // Redirect to validate.php
                 alert('User Rejected successfully.'); // Optional: alert message
                 
               </script>";
