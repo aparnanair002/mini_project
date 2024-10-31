@@ -81,7 +81,8 @@
         <br></p>
 
               <p style="size: 100px;">
-        Location:  <input type="text" id="location" name="p3" placeholder="Enter Location" style="margin-left:30px;margin-top:50px;width: 500px;height:50px" required>
+        Location:  <input type="text" id=".
+        location" name="p3" placeholder="Enter Location" style="margin-left:30px;margin-top:50px;width: 500px;height:50px" required>
         <br><br></p>
                     
         
