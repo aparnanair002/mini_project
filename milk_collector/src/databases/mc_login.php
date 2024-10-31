@@ -7,7 +7,7 @@ if (isset($_POST["sub"])) {
     $pas = $_POST["p2"];
 
     // Prepare the SQL statement to prevent SQL injection
-    $sqse = "SELECT c_Id, c_username, c_password, c_status FROM tbl_collector WHERE c_username=?  AND c_password=?";
+    $sqse = "SELECT c_Id, c_username, c_password, status FROM tbl_collector WHERE c_username=?  AND c_password=?";
     $stmt = $con->prepare($sqse);
     $stmt->bind_param("ss", $usr, $pas);
     $stmt->execute();
@@ -19,7 +19,7 @@ if (isset($_POST["sub"])) {
         
         // Verify the password
        
-            if ($row['c_status'] == 1) {
+            if ($row['status'] == 1) {
                 $_SESSION['c_Id'] = $row['c_Id'];
                 header("Location: ../html/index.php");
                 exit();

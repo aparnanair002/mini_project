@@ -16,13 +16,13 @@ if (isset($_POST["Submit"])) {
     
     if ($sel && $sel->num_rows == 0) {
         // Prepare the insert statement
-        $sq = "INSERT INTO tbl_collector (c_name, c_username, c_password, location_society, c_homeaddress, phone_no, c_status) 
+        $sq = "INSERT INTO tbl_collector (c_name, c_username, c_password, location_society, c_homeaddress, phone_no, status) 
                 VALUES ('$nm', '$usr', '$pas', '$location','$add', '$phn', 0)";
         
         $result = mysqli_query($con, $sq);
 
         if ($result) {
-            $message = "Admin added Successfully !!";
+            $message = "Milk Collector added Successfully !!";
             header('Location: ../html/authentication-register.php?error=' . urlencode($message));
             exit();
         } else {

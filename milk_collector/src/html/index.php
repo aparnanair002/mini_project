@@ -13,9 +13,15 @@
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
-   <?php
-   include('sidebar.php');
-   ?>
+    <?php
+session_start();
+if (!isset($_SESSION['c_Id'])) {
+  header('Location: authentication-login.php');
+  exit;
+}
+
+include("sidebar.php")
+?> 
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->

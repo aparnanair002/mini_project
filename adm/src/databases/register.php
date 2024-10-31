@@ -22,7 +22,7 @@ if (isset($_POST["Submit"])) {
         $result = mysqli_query($con, $sq);
 
         if ($result) {
-            $message = "Admin added Successfully !!";
+            $message = "Society added Successfully !!";
             header('Location: ../html/authentication-register.php?error=' . urlencode($message));
             exit();
         } else {
