@@ -64,26 +64,7 @@ include("headlogin.php")
                     <h2 style="color: white; font-family:Georgia, 'Times New Roman', Times, serif; margin-top: 30px;">
                       My Reports
                     </h2>
-                    <!-- <form action="post"> -->
-                    <!-- <p style="size: 50px;">Name   :<input type="text" name="p1"> -->
-                    <!-- Username :<input type="text" name="p2"> -->
-                    <!-- Password :<input type="password" name="p3"> -->
-                    <!-- Address :<input type="text" name="p4"> -->
-                    <!-- Phone no :<input type="text" name="p5"> -->
-                    <!-- Location :<input type="text" name="p6"> -->
-                    <!-- Gender :<input type="radio" name="ctype" value="Female">Female -->
-                    <!-- <input type="radio" name="ctype" value="Male">Male</p> -->
-                    <!-- <div class="btn-box" style="margin: left 235px;"> -->
-                      <!-- <a href="fhome.php" class="btn1"> -->
-                        <!-- Submit -->
-                      <!-- </a> -->
-                      <!-- <a href="fsignlogin.php" class="btn1"> -->
-                        <!-- Cancel -->
-                      <!-- </a></div><div class="col-md-4" style="margin-top:25px"> -->
-                      <!-- <a href="fhome.php" class="btn1"> -->
-                        <!-- Forgot password? -->
-                      <!-- </a> -->
-                    <!-- </div> -->
+                  
                       
                     
                     </div>

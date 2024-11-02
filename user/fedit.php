@@ -13,7 +13,13 @@ include("headlogin.php");
 $se = $_SESSION['f_Id'];; // or use $_POST['session_id'] based on your form method
 
 // Prepare and bind the SQL statement
-$stmt = $con->prepare("SELECT * FROM tbl_dairyf WHERE f_Id = ?");
+$stmt = $con->prepare("
+    SELECT df.*, l.loc_name 
+    FROM tbl_dairyf df
+    JOIN tbl_location l ON df.location_society = l.loc_id
+    WHERE df.f_Id = ?
+");
+
 $stmt->bind_param("s", $se);
 
 // Execute the statement
@@ -32,7 +38,7 @@ if ($result->num_rows > 0) {
     $password=$row['f_password'];
     $homeaddress=$row['f_homeaddress'];
     $phone_no=$row['phone_no'];
-    $location_society=$row['location_society'];
+    $location_society=$row['loc_name'];
     $gender=$row['gender'];
     $status=$row['f_status'];
 
@@ -116,7 +122,7 @@ $con->close();
     <select name="p6" id="p6" style="width: 450px; height:50px; margin-left:20px;">
     <?php  
     include "databases/connection.php";
-    $sql = "SELECT loc_name FROM tbl_location ORDER BY loc_name ASC";  
+    $sql = "SELECT loc_id,loc_name FROM tbl_location ORDER BY loc_name ASC";  
     $result = mysqli_query($con, $sql);
     echo "<option value='" . htmlspecialchars($location_society) . "'>" . htmlspecialchars($location_society) . "</option>";
     
@@ -124,7 +130,7 @@ $con->close();
     if (mysqli_num_rows($result) > 0) {
         // Fetch each row and display in the dropdown
         while ($row = mysqli_fetch_array($result)) {
-            echo "<option value='" . htmlspecialchars($row["loc_name"]) . "'>" . htmlspecialchars($row["loc_name"]) . "</option>";
+            echo "<option value='" . htmlspecialchars($row["loc_id"]) . "'>" . htmlspecialchars($row["loc_name"]) . "</option>";
         }
     } else {
         echo "<option disabled>No locations found.</option>";

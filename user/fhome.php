@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <link rel="icon" href="images/logo.png" type="images/logo.png">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
+    <link rel="stylesheet" href="css/tooplate-wave-cafe.css">
+
 <style>
   .warn{
     color:#E8FFB7; 
@@ -10,6 +15,18 @@
 
 
   }
+  .btn-circle {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-circle i {
+    font-size: 16px; /* Adjust icon size */
+}
   
 </style></head>
 
@@ -21,22 +38,23 @@ if (!isset($_SESSION['f_Id'])) {
   exit;
 }
 include("head.php");
-$_SESSION['f_Id'];
+include("./databases/connection.php");
 ?>
 <body>
 <!-- slider section -->
-<section class="slider_section ">
-            <div class="container ">
-                <div class="row">
-                <div class="col-md-6 ">
-                  <div class="detail-box" style="margin-bottom: 155px;">
-                    <h1 >
+
+<h1 style="color:white;font-weight:50px; text-align:center;">
                       Dairy  Direct  Home
                     </h1>
+<section class="slider_section " style="padding: 0%;">
+            <div class="container"style="padding: 0%;" >
+                <div class="row">
+                <div class="col-md-4 ">
+                  <div class="detail-box" >
                     <form action="databases/fhome.php" method="post">
                     <br>
                     
-                    <select name="time" class="sel" required>
+                    <select name="time" class="sel" style="width:200px;margin-left:0px;margin-bottom:100px;" required>
                       <option disabled selected value>--select--</option>
                         <option value="0">Morning</option>
                             <option value="1">Evening</option>
@@ -52,8 +70,8 @@ $_SESSION['f_Id'];
 <br></form></div>
 <form name="payment">
                     <br>
-                    <k style="margin-top: 25px; font-size:40px; color:white">Payment Till Date : &#8377</k>
-                    <label for="Payment" style="size: 64px; color:white" name="pay" value="Payment Till Date :"><!--****php code********-->
+                    <k style="margin-top: 25px; font-size:38px; color:white">Payment Till Date : &#8377</k>
+                    <label for="Payment" style="font-size: 50px; color:white" name="pay" value="Payment Till Date :"><!--****php code********-->
                     </label>
                       
                     </form>
@@ -73,16 +91,90 @@ $_SESSION['f_Id'];
     ?>
                   </div>
                 </div>
-                <div class="col-md-6">
-                 <div class="img-box">
+                <div class="col-md-2">
+                <div class="img-box">
                     <img src="images/slider-img.png" alt="">
-                  </div>
+                  
+                  </div> 
                 </div>
-              </div>
+                <div class="col-lg-6">
+            <div class="card w-100">
+            <div class="card-body p-4">
+           
+           
+                        <?php
+                        // Assuming you have already established a database connection in $con
+                        $fid=$_SESSION['f_Id'];
+                        // Fetch data from the database
+                        $stmt = $con->prepare("SELECT *
+                                                FROM  tbl_todaysel 
+                                                WHERE f_Id = ? AND t_date = CURDATE() ORDER BY t_status asc;");
+                        $stmt->bind_param("s", $fid); // Bind the $loca variable as a string parameter
+                        $stmt->execute();
+                        $stmt->bind_result($tid, $tdate, $opt, $fid,$status);
+                        
+                        $todayDate = date('d-m-y');
+                        echo"  <div class='mb-2'>
+                <h3 class='card-title fw-semibold'>Today's Milk Log  &nbsp; &nbsp;  ( &nbsp;".htmlspecialchars($todayDate)."  &nbsp;)
+           
+             </div>
+             <div class='table-responsive'>
+                <table class='table table-striped' id='data-table'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>To Do</th>
+                            <th scope='col'>Shift</th>
+                            <th scope='col'>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
+                   
+                        // Loop through the results and create table rows
+                        while ($stmt->fetch()) {
+                          $shift = ($opt == 0) ? "Morning" : "Evening";
+                          $checked = ($status == 1) ? "Visited" : "Not Visited"; // Checkbox state based on t_status
+                          $name = ($status == 1) ? "<p style='color:green'>Collected !!</p>" 
+                          : "<button class='btn btn-primary rounded-circle btn-circle' onclick='confirmDelete(" . htmlspecialchars($tid) . ")'>
+                              <i class='fas fa-trash'></i>
+                            </button>";                          
+                            if (empty($name)) {
+                              $name = "Delete"; // Fallback text if icon fails
+                          }
+                           echo "<tr>";
+                          echo "<td>".$name ."</td>";
+                          echo "<td>" . htmlspecialchars($shift) . "</td>";
+                          echo "<td>" . htmlspecialchars($checked) . "</td>";
+                          echo "</tr>";
+                        }
+                        echo "<tr></tr><tr></tr><tr>";
+                        
+                        // Close the statement
+                        $stmt->close();
+                    echo "</tbody>"; ?>
+                    
+                   <br><br>
+                </table>
+               
             </div>
+        </div>
+            </div>
+        </div>
+        
+              
         
     </section>
-    <!-- end slider section -->
+    <script>
+function confirmDelete(tid) {
+    // Show a confirmation dialog
+    var result = confirm("Are you sure you want to delete this record?");
+    if (result) {
+        // If the user clicked "OK", proceed with the deletion
+        // You can redirect to a PHP script or make an AJAX call to delete the record
+        window.location.href = "./databases/deletemilklog.php?id=" + tid; // Example of redirecting to a delete script
+    }
+}
+</script>
+
 </body>
 
 </html>

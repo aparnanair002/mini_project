@@ -113,8 +113,12 @@ include("../databases/connection.php");
                     </thead>
                     <tbody>
                      <?php
-                     $stmt = $con->prepare("SELECT f_Id,f_name,f_homeaddress,phone_no,location_society,gender,f_status FROM tbl_dairyf WHERE f_status = 0 "); //"and location_society=$loc_id"
-                     $stmt->execute();
+                    $loc_id=$_SESSION['loc'];
+                    $stmt = $con->prepare("SELECT s.f_Id,s.f_name,s.f_homeaddress,gender,s.phone_no,s.f_status, l.loc_name AS location_society FROM  tbl_dairyf s
+   JOIN tbl_location l ON s.location_society = l.loc_id 
+   WHERE s.f_status = 0 and s.location_society=$loc_id
+   ");
+    $stmt->execute();
 
                           // Get the result
                           $result = $stmt->get_result();

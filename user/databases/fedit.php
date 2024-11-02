@@ -25,7 +25,7 @@ if (empty($name) || empty($username) || empty($homeaddress) || empty($phone_no) 
 }
 
 // Prepare the SQL statement
-$stmt = $con->prepare("UPDATE tbl_dairyf SET f_name = ?, f_username = ?, f_homeaddress = ?, phone_no = ?, location_society = ?, gender = ?, f_status = 0 WHERE f_Id = ?");
+$stmt = $con->prepare("UPDATE tbl_dairyf SET f_name = ?, f_username = ?, f_homeaddress = ?, phone_no = ?, location_society = ?, gender = ?, f_status = 1 WHERE f_Id = ?");
 
 // Bind parameters
 $stmt->bind_param("ssssssi", $name, $username, $homeaddress, $phone_no, $location_society, $gender, $f_Id);
