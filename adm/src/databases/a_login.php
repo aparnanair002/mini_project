@@ -7,7 +7,7 @@ if (isset($_POST["sub"])) {
     $pas = $_POST["p2"];
 
     // Prepare the SQL statement to prevent SQL injection
-    $sqse = "SELECT s_Id, s_username, s_password, s_status FROM tbl_society WHERE s_username=?  AND s_password=?";
+    $sqse = "SELECT s_Id, s_username, s_password,location_society, s_status FROM tbl_society WHERE s_username=?  AND s_password=?";
     $stmt = $con->prepare($sqse);
     $stmt->bind_param("ss", $usr, $pas);
     $stmt->execute();
@@ -21,6 +21,7 @@ if (isset($_POST["sub"])) {
        
             if ($row['s_status'] == 1) {
                 $_SESSION['s_Id'] = $row['s_Id'];
+                $_SESSION['loc'] = $row['location_society'];
                 header("Location: ../html/index.php");
                 exit();
             } else {

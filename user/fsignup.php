@@ -84,14 +84,14 @@ include("headlogin.php")
                     <select name="p6" id="p6" style="width: 450px; height:50px; margin-left:20px;">
                     <?php  
                     include "databases/connection.php";
-                    $sql = "SELECT loc_name FROM tbl_location order by loc_name ASC ";  // Replace 'locations' with your table name and 'name' with your column name
+                    $sql = "SELECT loc_id,loc_name FROM tbl_location order by loc_name ASC ";  // Replace 'locations' with your table name and 'name' with your column name
                     $result = mysqli_query($con,$sql);
                     echo "<option disabled selected value>---select an option---</option>";
                     // Check if there are results
                     if (mysqli_num_rows($result)>0) {
                         // Fetch each row and display in the dropdown
                         while ($row = mysqli_fetch_array($result)) {
-                            echo "<option value='" . $row["loc_name"] . "'>" . $row["loc_name"] . "</option>";
+                            echo "<option value='" . $row["loc_id"] . "'>" . $row["loc_name"] . "</option>";
                         }
                     
                         // End the HTML dropdown

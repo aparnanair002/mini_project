@@ -1,10 +1,23 @@
 <!doctype html>
 <html lang="en">
+<?php
 
+
+session_start();
+if (!isset($_SESSION['s_Id'])) {
+  header('Location: authentication-login.php');
+  exit;
+}
+
+
+include("../databases/connection.php");
+
+
+?>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
+  <title>Admin-Diarydiary</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
@@ -15,14 +28,9 @@
     data-sidebar-position="fixed" data-header-position="fixed">
     <!-- Sidebar Start -->
     <?php
-session_start();
-if (!isset($_SESSION['s_Id'])) {
-  header('Location: authentication-login.php');
-  exit;
-}
-
-include("sidebar.php")
-?> 
+    include('sidebar.php');
+    ?>
+     
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
@@ -73,18 +81,83 @@ include("sidebar.php")
       </header>
       <!--  Header End -->
       <div class="container-fluid">
-        <div class="container-fluid">
+        
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4" style="margin-left:300px;" required>Milk collector validate</h5>
+              <h5 class="card-title fw-semibold mb-4">Validate Milk Collector</h5>
+              <div class="table-responsive">
+                  <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4">
+                      <tr>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">S.Id</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Name</h6>
+                        </th>
+                        
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Address</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Location</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Phone number</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Accept</h6>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     <?php
+                     $loc_id=$_SESSION['loc'];
+                     $stmt = $con->prepare("SELECT s.c_Id,s.c_name,s.c_homeaddress,s.phone_no,s.status, l.loc_name AS location_society FROM  tbl_collector s
+    JOIN tbl_location l ON s.location_society = l.loc_id 
+    WHERE s.status = 0 and s.location_society=$loc_id
+    ");
+                     $stmt->execute();
+
+                          // Get the result
+                          $result = $stmt->get_result();
+                     if ($result->num_rows > 0) {
+                      $id = 1; // To keep track of the ID for display
+                      while ($row = $result->fetch_assoc()) {
+                          // Display each row in the table
+                          echo '<tr>';
+                          echo '<td class="border-bottom-0"><h6 class="fw-semibold mb-0">' . $id . '</h6></td>';
+                          echo '<td class="border-bottom-0">';
+                          echo '<h6 class="fw-semibold mb-1">' . htmlspecialchars($row['c_name']) . '</h6>';
+                          echo '</td>';
+                          echo '<td class="border-bottom-0"><p class="mb-0 fw-normal">'.htmlspecialchars($row['c_homeaddress']) . '</p></td>';
+                          echo '<td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">' . htmlspecialchars($row['location_society']) . '</h6></td>';
+                          echo '<td class="border-bottom-0"><h6 class="fw-semibold mb-0 fs-4">' . htmlspecialchars($row['phone_no']) . '</h6></td>';
+                          echo '<td class="border-bottom-0"><form method="POST" action="../databases/accept_collector.php">';
+                          echo '<input type="hidden" name="user_id" value="' . $row['c_Id'] . '">'; // Assuming you have an ID column
+                          echo '<button type="submit" class="btn btn-success">Accept</button>';
+                          echo '</form></td>';
+                          echo '</tr>';
+                          $id++; // Increment the ID for the next row
+                      }
+                  } else {
+                      echo '<tr><td colspan="7" class="text-center">No results found.</td></tr>';
+                  }
+                     ?>
+                                      
+                    </tbody>
+                  </table>
+                
+                
+                </div>
               
-                    <button type="submit" class="btn btn-primary" style="margin-left:300px;" required>Submit</button>
+          </div>
+        </div>
+              
+                    
                   </form>
                 </div>
               </div>
-              
-              
-
               <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>
