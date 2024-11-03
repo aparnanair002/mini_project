@@ -4,9 +4,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
+  <title>Society </title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .table-container {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .btn-edit {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .btn-edit:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,70 +44,139 @@ if (!isset($_SESSION['s_Id'])) {
   header('Location: authentication-login.php');
   exit;
 }
-
-include("sidebar.php")
+include("../databases/connection.php");
+include("sidebar.php");
 ?> 
-     
     <!--  Main wrapper -->
     <div class="body-wrapper">
       <!--  Header Start -->
-      <header class="app-header">
-        <nav class="navbar navbar-expand-lg navbar-light">
-          <ul class="navbar-nav">
-            <li class="nav-item d-block d-xl-none">
-              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-                <i class="ti ti-menu-2"></i>
-              </a>
-            </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                <i class="ti ti-bell-ringing"></i>
-                <div class="notification bg-primary rounded-circle"></div>
-              </a>
-            </li> -->
-          </ul>
-          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-              <!-- <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">Download Free</a> -->
-              <li class="nav-item dropdown">
-                <!-- <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
-                </a> -->
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                  <div class="message-body">
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-user fs-6"></i>
-                      <p class="mb-0 fs-3">My Profile</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">My Account</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Task</p>
-                    </a>
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <!--  Header End -->
-      <div class="container-fluid">
-        <div class="container-fluid">
+      <?php  include("header.php"); ?>
+  
+              <div class="container-fluid">
           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Milk Validate</h5>
-              
-                    <button type="submit" class="btn btn-primary">Submit</button>
+            
+              <?php
+ // Include your database connection
+
+$loca = $_SESSION['loc'];
+
+// Fetch records from the database
+$sql = "SELECT m.m_id, m.f_id, m.milk_type, m.t_date, m.val_status,m.c_ltr, d.f_Id, d.f_homeaddress, d.f_name, d.location_society 
+FROM tbl_milk_records m, tbl_dairyf d WHERE d.f_Id = m.f_id AND d.location_society = '$loca' and m.t_date=CURDATE() order by m.val_status asc";
+
+$result = $con->query($sql);
+?>
+
+<div class="container table-container">
+    <h2>Milk Records Today
+    <button class="btn btn-success" id="download-btn" style="margin-left: 650px;">Download CSV</button></h2>
+    <?php if ($result->num_rows > 0): ?>
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered" id="data-table">
+    <thead class="thead-dark">
+        <tr>
+            <th>S.No</th>
+            <th>Farmer Name</th>
+            <th>Farmer Address</th>
+            <th>Milk Type</th>
+            <th>Quantity (liters)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $id = 1;
+        // Output data of each row
+        while ($row = $result->fetch_assoc()) {
+           
+            echo "
+                <td>" . $id . "</td>
+                <td>" . htmlspecialchars($row["f_name"]) . "</td>
+                <td>" . htmlspecialchars($row["f_homeaddress"]) . "</td>
+                <td>" . htmlspecialchars($row["milk_type"]) . "</td>
+                <td>" . htmlspecialchars($row["c_ltr"]) . "</td>";
+                 if ($row['val_status'] == 0) {
+                echo "<td>
+                    <button class='btn btn-primary'><a style='color:white;' href='add_milk_rec.php?id=" . htmlspecialchars($row["m_id"]) . "'>Add Details</a></button>
+                </td>
+            </tr>";
+            } 
+            elseif($row['val_status'] == 2) {
+              echo "<td>
+                  <button class='btn btn-danger'><a style='color:white;' href='add_milk_rec.php?id=" . htmlspecialchars($row["m_id"]) . "'>Pending delete</a></button>
+              </td>
+          </tr>";
+          }
+            else {
+                echo "<td>
+                    <button class='btn btn-success'><a style='color:white;' href='add_milk_rec.php?id=" . htmlspecialchars($row["m_id"]) . "'>Edit Details</a></button>
+                </td>
+            </tr>";
+            }
+
+                
+
+            $id++;
+        }
+        ?>
+    </tbody>
+</table>
+        </div>
+    <?php else: ?>
+        <p class="alert alert-warning">No records found.</p>
+    <?php endif; ?>
+
+</div>
+
+<?php
+// Close the connection
+$con->close();
+?>
                   </form>
                 </div>
               </div>
-              <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+              </div></div></div></body>
+<script>document.getElementById('download-btn').addEventListener('click', function() {
+    let csv = [];
+    const rows = document.querySelectorAll('#data-table tr');
+
+    for (let i = 0; i < rows.length; i++) {
+        const cols = rows[i].querySelectorAll('td, th');
+        const rowData = [];
+        for (let j = 0; j < cols.length - 1; j++) {
+            // Get the text content of the cell
+            let cellText = cols[j].innerText;
+
+            // Escape double quotes by replacing " with ""
+            cellText = cellText.replace(/"/g, '""');
+
+            // Wrap the cell text in double quotes
+            rowData.push(`"${cellText}"`);
+        }
+        csv.push(rowData.join(','));
+    }
+    // Create a CSV file and trigger download
+    const csvFile = new Blob([csv.join('\n')], { type: 'text/csv' });
+    const tempLink = document.createElement('a');
+    
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date();
+    const dateString = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+
+    // Set the filename with today's date
+    tempLink.download = `data_todays_milk_admin_${dateString}.csv`; // e.g., data_2023-10-10.csv
+    tempLink.href = URL.createObjectURL(csvFile);
+    tempLink.style.display = 'none';
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+});
+</script>           
+                    
+              <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>
   <script src="../assets/js/app.min.js"></script>

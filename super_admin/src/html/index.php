@@ -147,7 +147,7 @@ $result = $stmt->get_result();
         echo '<tr><td colspan="3" class="text-center">No results found.</td></tr>';
     }
     ?>
-</form>
+
                           </form>
                       </div>
                   </div>

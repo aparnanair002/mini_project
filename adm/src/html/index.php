@@ -18,6 +18,7 @@ if (!isset($_SESSION['s_Id'])) {
   header('Location: authentication-login.php');
   exit;
 }
+$loca=$_SESSION['loc'];
 include('../databases/connection.php');
 include("sidebar.php");
 ?>  
@@ -26,9 +27,9 @@ include("sidebar.php");
      <?php include('header.php');?>
       <!--  Header End -->
       <div class="container-fluid">
-        <!--  Row 1 -->
+        <!--  Row 1 --
         <div class="row">
-          <div class="col-lg-8 d-flex align-items-strech">
+          <div class="col-lg-6 d-flex align-items-strech">
             <div class="card w-100">
               <div class="card-body">
                 <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
@@ -49,57 +50,81 @@ include("sidebar.php");
                 <div id="chart"></div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4">
+          </div>-->
+          <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12">
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <form id="milkprice1" method="post" action="">
-                            <h5 class="card-title fw-semibold mb-4">Today's Milk Price</h5>
-                            <input type="text" name="p1" placeholder="Milk Price" style="font-size: 20px;"><br><br>
-                            <button type="submit" class="btn btn-primary">Enter</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <form id="milkprice2" method="post" action="">
-                            <h5 class="card-title fw-semibold mb-4">Add New Milk Type</h5>
-                            <input type="text" name="p2" placeholder="Milk Type" style="font-size: 20px;"><br><br>
-                            <button type="submit" class="btn btn-primary">Add</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Column for Adding New Milk Type -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <form id="milkprice2" method="post" action="../databases/addmilktype.php">
+                        <h5 class="card-title fw-semibold mb-4">Add New Milk Type</h5>
+                        <input type="text" name="p2" placeholder="Milk Type" style="font-size: 20px;" required><br><br>
+                        <input type="submit" class="btn btn-primary" value="Add" name="sub">
+                    </form>
+                    <h5 class="mt-4">Available Milk Types</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>S.no</th>
+                                <th>Milk Type</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sno = 1;
+                            // Fetch available milk types
+                            $result = $con->query("SELECT type_id, type_name FROM tbl_milk_type");
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <form id="milkprice2" method="post" action="">
-                            <h5 class="card-title fw-semibold mb-4">Milk Sold Today</h5>
-                            <input type="text" name="p2" placeholder="Milk Sold Today" style="font-size: 20px;"><br><br>
-                            <button type="submit" class="btn btn-primary">Add</button>
-                        </form>
-                    </div>
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $sno . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['type_name']) . "</td>";
+                                    echo "<td><a href='?delete=" . $row['type_id'] . "' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this milk type?\");'>Delete</a></td>";
+                                    echo "</tr>";
+                                    $sno++;
+                                }
+                            } else {
+                                echo "<tr><td colspan='3'>No milk types available.</td></tr>";
+                            }
+
+                            if (isset($_GET['delete'])) {
+                                $milkId = intval($_GET['delete']);
+                                $deleteStmt = $con->prepare("DELETE FROM tbl_milk_type WHERE type_id = ?");
+                                $deleteStmt->bind_param("i", $milkId);
+
+                                if ($deleteStmt->execute()) {
+                                    echo "<div class='alert alert-success'>Milk type deleted successfully! Refresh the tab!</div>";
+                                } else {
+                                    echo "<div class='alert alert-danger'>Error: " . $deleteStmt->error . "</div>";
+                                }
+
+                                $deleteStmt->close();
+                            }
+                            $con->close();
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column for Milk Sold Today -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <form id="milkprice2" method="post" action="">
+                        <h5 class="card-title fw-semibold mb-4">Milk Sold Today</h5>
+                        <input type="text" name="p2" placeholder="Milk Sold Today" style="font-size: 20px;" required><br><br>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-        
              
     
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
