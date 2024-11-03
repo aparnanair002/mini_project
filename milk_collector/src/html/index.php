@@ -21,6 +21,7 @@ if (!isset($_SESSION['c_Id'])) {
 }
 include "../databases/connection.php";
 include("sidebar.php");
+$loca=$_SESSION['locat'];
 ?> 
     <!--  Main wrapper -->
     <div class="body-wrapper">
@@ -69,7 +70,7 @@ include("sidebar.php");
                           echo "<td><input type='checkbox' style='width:20px;height: 20px;' class='house-checkbox' data-fid='$tid' $checked onchange='updateCheckbox(this)'></td>"; // Use $f_Id for the data attribute
                           echo "<td>" . htmlspecialchars($name) . "</td>";
                           echo "<td>" . htmlspecialchars($address) . "</td>";
-                          echo "<td>" . htmlspecialchars($shift) . "</td>";
+                          echo "<td><b>" . htmlspecialchars($shift) . "</b></td>";
                           echo "</tr>";
                           if($status==1){
                           $count++; //to count total  number of unchecked houses
@@ -140,7 +141,7 @@ document.getElementById('download-csv').addEventListener('click', function() {
     for (let i = 0; i < rows.length; i++) {
         const cols = rows[i].querySelectorAll('td, th');
         const rowData = [];
-        for (let j = 0; j < cols.length; j++) {
+        for (let j = 0; j < cols.length ; j++) {
           if (cols[j].querySelector('input[type="checkbox"]')) {
                 // If the checkbox is checked, add "Checked", otherwise add "Unchecked"
                 const checkbox = cols[j].querySelector('input[type="checkbox"]');
@@ -167,7 +168,7 @@ document.getElementById('download-csv').addEventListener('click', function() {
     const dateString = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
 
     // Set the filename with today's date
-    tempLink.download = `data_todaysmilk_${dateString}.csv`; // e.g., data_2023-10-10.csv
+    tempLink.download = `data_milk_reg_${dateString}.csv`; // e.g., data_2023-10-10.csv
     tempLink.href = URL.createObjectURL(csvFile);
     tempLink.style.display = 'none';
     document.body.appendChild(tempLink);

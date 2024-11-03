@@ -28,23 +28,15 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="" aria-expanded="false">
+              <a class="sidebar-link" href="./add_milk.php" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-description"></i>
                 </span>
-                <span class="hide-menu">Milk  Collection</span>
+                <span class="hide-menu">Add Milk</span>
 
               </a>
             </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">Homes to Visit</span>
-
-              </a>
-            </li>
+            
             <li class="sidebar-item">
               <a class="sidebar-link" href="./v_collection.php" aria-expanded="false">
                 <span>
