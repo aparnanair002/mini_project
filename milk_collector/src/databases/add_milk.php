@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Execute the statement and check for success
     if ($stmt->execute()) {
-        echo "<script> alert('Successfully entered data');window.location.href='../html/add_milk.php';</script>";
+        echo "<script> alert('Successfully entered data');window.location.href='../html/v_collection.php';</script>";
     } else {
         echo "<script>window.location.href='../html/add_milk.php'; alert('.$stmt->error.');</script>";
     }

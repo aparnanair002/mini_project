@@ -75,7 +75,7 @@ include("sidebar.php");
                             <?php
                             $sno = 1;
                             // Fetch available milk types
-                            $result = $con->query("SELECT type_id, type_name FROM tbl_milk_type");
+                            $result = $con->query("SELECT type_id, type_name,loc_id FROM tbl_milk_type where loc_id=$loca");
 
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {

@@ -13,11 +13,11 @@
               $stmt->execute();
           
               // Bind the result
-              $stmt->bind_result($c_name,$loca);
+              $stmt->bind_result($c_name,$loc);
           
               // Fetch the result
               if ($stmt->fetch()) {
-                  echo "<h3>Welcome  &nbsp; &nbsp;" . $c_name."  (&nbsp;&nbsp;Milk Society  &nbsp;$loca &nbsp;&nbsp;)</h3>";
+                  echo "<h3>Welcome  &nbsp; &nbsp;" . $c_name."  (&nbsp;&nbsp;Milk Society  &nbsp;$loc &nbsp;&nbsp;)</h3>";
               } else {
                   echo "No collector found with the given ID.";
               }

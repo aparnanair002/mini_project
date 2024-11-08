@@ -11,7 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Prepare the statement to update the status
     $stmt = $con->prepare("UPDATE tbl_todaysel SET t_status = ? WHERE t_id = ? AND t_date = CURDATE()");
     $stmt->bind_param("ii", $status, $f_id);
-    $stmt->execute();
+    if($stmt->execute()){
+        echo "<script> alert('Status updated successfully!'); window.location.href='../html/add_milk.php'; </script>";
+    }
     
     // Increment $today_house if the checkbox is checked
    

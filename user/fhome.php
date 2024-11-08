@@ -49,7 +49,7 @@ include("./databases/connection.php");
 <section class="slider_section " style="padding: 0%;">
             <div class="container"style="padding: 0%;" >
                 <div class="row">
-                <div class="col-md-4 ">
+                <div class="col-md-6 ">
                   <div class="detail-box" >
                     <form action="databases/fhome.php" method="post">
                     <br>
@@ -91,12 +91,7 @@ include("./databases/connection.php");
     ?>
                   </div>
                 </div>
-                <div class="col-md-2">
-                <div class="img-box">
-                    <img src="images/slider-img.png" alt="">
-                  
-                  </div> 
-                </div>
+                
                 <div class="col-lg-6">
             <div class="card w-100">
             <div class="card-body p-4">
@@ -159,7 +154,91 @@ include("./databases/connection.php");
         </div>
             </div>
         </div>
-        
+        <div class="col-md-4">
+                <div class="img-box">
+                    <img src="images/slider-img.png" alt="">
+                  
+                  </div> 
+                </div>
+        <div class="col-lg-8">
+            <div class="card w-100">
+            <div class="card-body p-4">
+           
+           
+                        <?php
+
+                        $stmt = $con->prepare("SELECT m_id,f_id,c_ltr,a_ltr,message,amount,val_status,t_date
+                                                FROM  tbl_milk_records 
+                                                WHERE f_id = ? AND t_date = CURDATE();");
+                        $stmt->bind_param("s", $fid); // Bind the $loca variable as a string parameter
+                        $stmt->execute();
+                        $stmt->bind_result($mid,$f_id,$coll,$rep,$msg, $amnt,$val,$tdate);
+                        
+                        $todayDate = date('d-m-y');
+                        echo"  <div class='mb-2'>
+                <h3 class='card-title fw-semibold'>Today's Milk Log  &nbsp; &nbsp;  ( &nbsp;".htmlspecialchars($todayDate)."  &nbsp;)
+           
+             </div>
+             <div class='table-responsive'>
+                <table class='table table-striped' id='data-table'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>Status</th>
+                            <th scope='col'>Collected litres</th>
+                            <th scope='col'>Reported litres</th>
+                            <th scope='col'>Message</th>
+                            <th scope='col'>Amount</th>
+                            </tr>
+                    </thead>
+                    <tbody>";
+                   
+                        // Loop through the results and create table rows
+                        while ($stmt->fetch()) {
+                          switch ($val) {
+                            case 0:
+                                $checked = "Not Authenticated";
+                                break;
+                            case 1:
+                                $checked = "Accepted";
+                                break;
+                            case 2:
+                                $checked = "<button class='btn btn-danger rounded-circle btn-circle' onclick='confirmDeletemilk(" . htmlspecialchars($mid) . ")'>
+                              <i class='fas fa-trash'></i>
+                            </button>";
+                                break;
+                            default:
+                                $checked = "Unknown Status"; // Optional: handle unexpected values
+                                break;
+                        }     
+                        
+                        if(empty($msg))
+                        {
+                          $msg="No Messages to display.";
+                        }
+                          
+                           echo "<tr>";
+                          echo "<td>".$checked ."</td>";
+                          echo "<td>" . htmlspecialchars($coll) . "</td>";
+                          echo "<td>" . htmlspecialchars($rep) . "</td>";
+                          echo "<td>" . htmlspecialchars($msg) . "</td>";
+                          echo "<td>" . htmlspecialchars($amnt) . "</td>";
+
+                          echo "</tr>";
+                        }
+                        echo "<tr></tr><tr></tr><tr>";
+                        
+                        // Close the statement
+                        $stmt->close();
+                    echo "</tbody>";
+                    $con->close(); ?>
+                    
+                   <br><br>
+                </table>
+               
+            </div>
+        </div>
+            </div>
+        </div>
               
         
     </section>
@@ -173,6 +252,14 @@ function confirmDelete(tid) {
         window.location.href = "./databases/deletemilklog.php?id=" + tid; // Example of redirecting to a delete script
     }
 }
+function confirmDeletemilk(mid) {
+    // Show a confirmation dialog
+    var result = confirm("Your log is set to delete by society. press ok if you are sure of this delete or cancel to cancel.Contact your society for further details");
+    if (result) {
+        // If the user clicked "OK", proceed with the deletion
+        // You can redirect to a PHP script or make an AJAX call to delete the record
+        window.location.href = "./databases/deletemilk.php?id=" + mid; // Example of redirecting to a delete script
+    }}
 </script>
 
 </body>
