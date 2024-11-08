@@ -82,6 +82,30 @@
                       <span class="hide-menu" style="margin-left:20px">Dashboard</span>
                   </a>
                   </li>
+                  <li class="sidebar-item">
+                        <a class="sidebar-link" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-list"></i>
+                            </span>
+                            <span class="hide-menu">Milk</span>
+                            <span>
+                                <i class="ti ti-arrow-down"></i>
+                            </span>
+                        </a>
+                        <ul class="sidebar-sublist">
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./milk_edit.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Milk Edit</span>
+                                </a>
+                            </li>
+
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./vmilk.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Report of Milk</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" aria-expanded="false">
                             <span>
@@ -136,34 +160,7 @@
                         </ul>
                     </li>
                        
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" aria-expanded="false">
-                            <span>
-                                <i class="ti ti-list"></i>
-                            </span>
-                            <span class="hide-menu">Milk</span>
-                            <span>
-                                <i class="ti ti-arrow-down"></i>
-                            </span>
-                        </a>
-                        <ul class="sidebar-sublist">
-                            <li class="sidebar-item">
-                                <a class="sidebar-sublink" href="./milk_edit.php">
-                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Milk Edit</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a class="sidebar-sublink" href="./vmilk.php">
-                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Validate Milk Collected</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a class="sidebar-sublink" href="./milk_report.php">
-                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Report of Milk</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                   
 
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="./logout.php" aria-expanded="false">

@@ -11,6 +11,51 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 </head>
 <style>
+
+.modal::after{
+    display: flex;
+    position: relative; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    
+    /* Flexbox to center the modal content */
+    display: none;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+.modal-content {
+    background-color: white; /* White background for the modal content */
+    margin: 20px; /* Margin around the modal content */
+    padding: 20px; /* Padding inside the modal */
+    border: 1px solid #888; /* Optional border */
+    border-radius: 5px; /* Rounded corners */
+    width: 80%; /* Width of the modal content */
+    max-width: 600px; /* Maximum width */
+}
+
+.close {
+    color: #aaa; /* Close button color */
+    float: right; /* Align to the right */
+    font-size: 28px; /* Font size */
+    font-weight: bold; /* Bold font */
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Change color on hover or focus */
+    text-decoration: none; /* Remove underline */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+button {
+    margin: 5px;
+}
 .input-group-container {
     display: flex; /* Use flexbox for the container */
     justify-content: space-between; /* Space the items evenly */
@@ -144,12 +189,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        
-                                            
-
-                                          
-                                            
                                      
                                         <div class="row mb-5">
 
@@ -187,14 +226,13 @@
                                         <div class="input-group">
                                             <input type="submit" name="sub" class="btn btn-primary btn-small" value="Submit">
                                         </div>
-                                        <div class="input-group">
-    <input type="button" class="btn btn-danger btn-small" value="Delete or Reset status" onclick="confirmDelete('<?php echo htmlspecialchars($m_id); ?>');">
-</div></div>
+                                       
                                        
                                     </form>
-                                    
-                                                                            
-                                    
+                                <div class="input-group">
+                                    <input type="button" class="btn btn-danger btn-small" value="Delete or Reset status" onclick="confirmDelete(<?php echo $m_id; ?>)">
+                                </div>
+                                   
                                     
                             </div>
                         </div>
@@ -204,7 +242,58 @@
         </div>
     </div>
 </body>
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Are you sure you want to delete this entry? This action cannot be undone.</p>
+        <button id="confirmYes" class="btn btn-danger">Yes</button>
+        <button id="confirmNo" class="btn btn-success">No</button>
+    </div>
+</div>
+
 <script>
+
+window.onload = checkLitres;
+
+// Your JavaScript code as previously discussed
+var currentId = null; // Global variable to hold the current ID
+
+function confirmDelete(id) {
+    currentId = id; // Store the ID in the global variable
+
+    // Show the modal
+    document.getElementById("confirmModal").style.display = "block";
+
+    // Get the Yes button
+    var yesButton = document.getElementById("confirmYes");
+    var noButton = document.getElementById("confirmNo");
+
+    // Set the Yes button action
+    yesButton.onclick = function() {
+        window.location.href = "../databases/delete_entry.php?id=" + encodeURIComponent(currentId);
+    };
+
+    // Set the No button action
+    noButton.onclick = function() {
+        window.location.href = "../databases/restentry.php?id=" + encodeURIComponent(currentId);
+    };
+}
+
+// Close modal function
+function closeModal() {
+    document.getElementById("confirmModal").style.display = "none"; // Hide the modal
+}
+
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    var modal = document.getElementById("confirmModal");
+    if (event.target == modal) {
+        closeModal(); // Hide the modal
+    }
+}
+
+
 function checkLitres() {
     const collectedLitres = parseFloat(document.getElementById('c_ltr').value) || 0;
     const reportedLitres = parseFloat(document.getElementById('a_ltr').value) || 0;
@@ -224,19 +313,7 @@ function checkLitres() {
 }
 
 window.onload = checkLitres;
-function confirmDelete() {
-    // Display a confirmation dialog
-    var result = confirm("Are you sure you want to delete this entry? This action cannot be undone.");
-    
-    if (result) {
-        // If the user clicks "Yes", redirect to the delete page
-        window.location.href = "../databases/delete_entry.php?id=<?php echo htmlspecialchars($m_id); ?>";
-    } else {
-        // If the user clicks "No", redirect to another page
-        window.location.href = "../databases/restentry.php?id=<?php echo htmlspecialchars($m_id); ?>";
-    }
-}
-</script>
+
 </script>
 
 </html>
