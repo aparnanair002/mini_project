@@ -35,7 +35,7 @@
                     <tbody>
                         <?php
                         // Assuming you have already established a database connection in $con
-                       $loca=$_SESSION['locat'];
+                       $loca=$_SESSION['loc'];
                         // Fetch data from the database
                         $stmt = $con->prepare("SELECT f.f_Id, f.f_name, f.f_homeaddress, f.location_society,t.t_id, t.t_status, t.t_opt, t.t_date 
                                                 FROM tbl_dairyf f, tbl_todaysel t 

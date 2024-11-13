@@ -5,8 +5,8 @@ if (!isset($_SESSION['f_Id'])) {
   header('Location: fsignlogin.php');
   exit;
 }
-
-include("headlogin.php")
+include("./databases/connection.php");
+include("headlogin.php");
 ?>    
 <body>
 
@@ -64,37 +64,111 @@ include("headlogin.php")
                     <h2 style="color: white; font-family:Georgia, 'Times New Roman', Times, serif; margin-top: 30px;">
                       Payment details
                     </h2>
-                    <!-- <form action="post"> -->
-                    <!-- <p style="size: 50px;">Name   :<input type="text" name="p1"> -->
-                    <!-- Username :<input type="text" name="p2"> -->
-                    <!-- Password :<input type="password" name="p3"> -->
-                    <!-- Address :<input type="text" name="p4"> -->
-                    <!-- Phone no :<input type="text" name="p5"> -->
-                    <!-- Location :<input type="text" name="p6"> -->
-                    <!-- Gender :<input type="radio" name="ctype" value="Female">Female -->
-                    <!-- <input type="radio" name="ctype" value="Male">Male</p> -->
-                    <!-- <div class="btn-box" style="margin: left 235px;"> -->
-                      <!-- <a href="fhome.php" class="btn1"> -->
-                        <!-- Submit -->
-                      <!-- </a> -->
-                      <!-- <a href="fsignlogin.php" class="btn1"> -->
-                        <!-- Cancel -->
-                      <!-- </a></div><div class="col-md-4" style="margin-top:25px"> -->
-                      <!-- <a href="fhome.php" class="btn1"> -->
-                        <!-- Forgot password? -->
-                      <!-- </a> -->
-                    <!-- </div> -->
-                      
-                    
-                    </div>
-                  </div></form>
-                </div>
+                    <div class="table-responsive">
+                <table class="table table-striped bg-light" id="data-table">
+                    <thead>
+                        <tr>
+                            
+                            <th scope="col">Date Last paid</th>
+                            <th scope="col">Amount</th>
+
+                            <th scope="col">Paid till Now</th>
+                            <th scope="col">to Pay</th>
+
+                        </tr>
+                       
+                    </thead>
+                    <tbody>
+                    <?php
+// Assuming you have already established a database connection in $con
+
+$f_Id=$_SESSION['f_Id'];
+// Fetch data from the database
+$query = "SELECT * from tbl_payment where f_id=$f_Id";
+
+$result = mysqli_query($con, $query);
+
+if ($result) {
+    $d = 1;
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>
                 
-              </div>
-            </div>
+                <td>{$row['date']}</td>
+                <td>{$row['amount']}</td>
+                 <td>{$row['paid']}</td>
+                <td>{$row['rest']}</td>
+               <td></tr>";    
+        }
+    echo "</tbody></table>";}
         
-    </section>
-    <!-- end slider section -->
+         else {
+            echo "Error: " . mysqli_error($con);
+        }
+    $con->close();
+
+?>             
+                   <br><br>
+                </table>
+               
+            </div>
+        </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+<script>
+
+document.getElementById('download-csv').addEventListener('click', function() {
+    let csv = [];
+    const rows = document.querySelectorAll('#data-table tr');
+
+    for (let i = 0; i < rows.length; i++) {
+        const cols = rows[i].querySelectorAll('td, th');
+        const rowData = [];
+        for (let j = 0; j < cols.length-2; j++) {
+          if (cols[j].querySelector('input[type="checkbox"]')) {
+                // If the checkbox is checked, add "Checked", otherwise add "Unchecked"
+                const checkbox = cols[j].querySelector('input[type="checkbox"]');
+                rowData.push(`"${checkbox.checked ? 'Visited' : 'Not Visited'}"`);
+            } else {
+                // Get the text content of the cell
+                let cellText = cols[j].innerText;
+
+                // Escape double quotes by replacing " with ""
+                cellText = cellText.replace(/"/g, '""');
+
+                // Wrap the cell text in double quotes
+                rowData.push(`"${cellText}"`);
+            }
+          }
+        csv.push(rowData.join(','));
+    }
+    // Create a CSV file and trigger download
+    const csvFile = new Blob([csv.join('\n')], { type: 'text/csv' });
+    const tempLink = document.createElement('a');
+    
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date();
+    const dateString = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+
+    // Set the filename with today's date
+    tempLink.download = `payment_report_${dateString}.csv`; // e.g., data_2023-10-10.csv
+    tempLink.href = URL.createObjectURL(csvFile);
+    tempLink.style.display = 'none';
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+});
+
+
+</script>
+
+              <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/sidebarmenu.js"></script>
+  <script src="../assets/js/app.min.js"></script>
+  <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
 </body>
 
 </html>

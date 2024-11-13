@@ -129,7 +129,8 @@ $result = $con->query($sql);
 </div>
 
 <?php
-// Close the connection
+
+
 $con->close();
 ?>
                   </form>

@@ -71,7 +71,29 @@ include("./databases/connection.php");
 <form name="payment">
                     <br>
                     <k style="margin-top: 25px; font-size:38px; color:white">Payment Till Date : &#8377</k>
-                    <label for="Payment" style="font-size: 50px; color:white" name="pay" value="Payment Till Date :"><!--****php code********-->
+                    <label for="Payment" style="font-size: 50px; color:white" name="pay" value="Payment Till Date :">
+                      <?php
+                      $f_Id=$_SESSION['f_Id'];
+                      $query = "SELECT rest from tbl_payment where f_id=$f_Id";
+                      $result = mysqli_query($con, $query);
+
+                      // Check for errors in the query execution
+                      if (!$result) {
+                          die("Query failed: " . mysqli_error($con));
+                      }
+                      
+                      // Fetch the result
+                      if (mysqli_num_rows($result) > 0) {
+                          while ($row = mysqli_fetch_assoc($result)) {
+                              // Process the row data
+                              echo  $row['rest'] ;
+                          }
+                      } else {
+                          echo "No records found.";
+                      }
+                      
+                      // Close the database connection
+?>             
                     </label>
                       
                     </form>
