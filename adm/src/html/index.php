@@ -27,30 +27,6 @@ include("sidebar.php");
      <?php include('header.php');?>
       <!--  Header End -->
       <div class="container-fluid">
-        <!--  Row 1 --
-        <div class="row">
-          <div class="col-lg-6 d-flex align-items-strech">
-            <div class="card w-100">
-              <div class="card-body">
-                <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                  <div class="mb-3 mb-sm-0">
-                    <h5 class="card-title fw-semibold">Sales Overview</h5>
-                  </div>
-                  <div>
-                    <select class="form-select">
-                      <option value="1">March 2023</option>
-                      <option value="2">April 2
-                        
-                      </option>
-                      <option value="3">May 2023</option>
-                      <option value="4">June 2023</option>
-                    </select>
-                  </div>
-                </div>
-                <div id="chart"></div>
-              </div>
-            </div>
-          </div>-->
           <div class="container-fluid">
     <div class="row">
         <!-- Column for Adding New Milk Type -->
@@ -103,7 +79,7 @@ include("sidebar.php");
 
                                 $deleteStmt->close();
                             }
-                            $con->close();
+                            
                             ?>
                         </tbody>
                     </table>
@@ -116,15 +92,142 @@ include("sidebar.php");
             <div class="card">
                 <div class="card-body">
                     <form id="milkprice2" method="post" action="">
-                        <h5 class="card-title fw-semibold mb-4">Milk Sold Today</h5>
-                        <input type="text" name="p2" placeholder="Milk Sold Today" style="font-size: 20px;" required><br><br>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </form>
+                        <h5 class="card-title fw-semibold mb-4">Milk Stock Today</h5>
+                        <?php
+$rsql = "SELECT SUM(m.a_ltr) AS collected_milk, val_status
+          FROM tbl_milk_records m
+          JOIN tbl_dairyf d ON m.f_id = d.f_Id
+          WHERE m.t_date = CURDATE() AND d.location_society = ? AND val_status = 1";
+
+$stmt = $con->prepare($rsql);
+if (!$stmt) {
+    die("Database query preparation failed: " . $con->error);
+}
+
+$stmt->bind_param("i", $loca); // Assuming $loca is an integer
+$stmt->execute();
+$rresult = $stmt->get_result();
+
+if ($row = $rresult->fetch_assoc()) {
+    $totalLiters = $row['collected_milk'];
+
+    if (is_null($totalLiters)) {
+        echo "<b>No milk collected today for this location.<br></b>";
+    } else {
+        echo "<b>Total Collected Milk: <p style='font-size:50px;'>" . number_format($totalLiters, 2) . " ltrs<br></b></p>";
+
+        $checkSql = "SELECT * FROM tbl_stock WHERE loc_id = ? AND stock_date = CURDATE()";
+        $checkStmt = $con->prepare($checkSql);
+        if (!$checkStmt) {
+            die("Check query preparation failed: " . $con->error);
+        }
+
+        $checkStmt->bind_param("i", $loca);
+        $checkStmt->execute();
+        $checkResult = $checkStmt->get_result();
+        
+        if ($checkResult->num_rows > 0) {
+            
+            $updateSql = "UPDATE tbl_stock 
+            SET collected_milk = $totalLiters, 
+                milk_sold = collected_milk - milk_sold
+            WHERE loc_id = $loca AND stock_date = CURDATE()";
+
+            if ($con->query($updateSql) === TRUE) {
+            echo "Stock updated successfully.<br>";
+            } else {
+            echo "Error updating stock: " . $con->error;
+            }
+
+          
+        } else {
+            // No entry exists, perform an insert
+            $insertSql = "INSERT INTO tbl_stock (loc_id, stock_date, collected_milk, milk_sold) 
+            VALUES ($loca, CURDATE(), $totalLiters, 0)";
+
+                    if ($con->query($insertSql) === TRUE) {
+                    echo "Stock inserted successfully.<br>";
+                    } else {
+                    echo "Error inserting stock: " . $con->error;
+                    }
+                }
+
+        $checkStmt->close();
+    }
+} else {
+    echo "No records found for the specified location and date.<br>";
+}
+
+$stmt->close();
+?>
+
+<!-- Form for entering sold liters -->
+<form method="post" action="">
+    <label for="sold_liters" class="mt-5">Enter Sold Liters:</label>
+    <input type="number" step=0.1  name="sold_liters" id="sold_liters" required>
+    <input type="submit" class="btn btn-primary mt-5" value="Update Sold Liters">
+</form><?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate and sanitize input for sold liters
+    if (isset($_POST['sold_liters'])) {
+        $soldLiters = filter_var($_POST['sold_liters'], FILTER_VALIDATE_FLOAT);
+
+        // Check if the input is valid
+        if ($soldLiters === false || $soldLiters < 0) {
+            echo "Please enter a valid number of sold liters.";
+        } else {
+            // Prepare SQL statement to check current milk sold
+            $checkSoldSql = "SELECT collected_milk, milk_sold FROM tbl_stock WHERE loc_id = ? AND stock_date = CURDATE()";
+            $checkSoldStmt = $con->prepare($checkSoldSql);
+            $checkSoldStmt->bind_param("i", $loca);
+            $checkSoldStmt->execute();
+            $checkSoldResult = $checkSoldStmt->get_result();
+
+            // Fetch the results
+            if ($checkSoldRow = $checkSoldResult->fetch_assoc()) {
+                $collectedMilk = $checkSoldRow['collected_milk'];
+                $currentMilkSold = $checkSoldRow['milk_sold'];
+                $blup=$currentMilkSold + $soldLiters;
+                $pew=$collectedMilk-$blup;
+
+                // Check if the new sold liters would exceed the collected milk
+                if (($blup) > $collectedMilk) {
+                    echo "Error: Total sold liters cannot exceed the collected milk.";
+                } else {
+                    $updateSql = "UPDATE tbl_stock SET milk_sold = $blup WHERE loc_id = $loca AND stock_date = CURDATE()";
+
+                            // Execute the query directly
+                            if ($con->query($updateSql) === TRUE) {
+                                echo "<br><center><b>Total Sold liters Today:<p style='font-size:20px;'>" . number_format($blup, 2) . " ltrs<br></b></p>";
+                                echo "<b>Total to Sell:<p style='font-size:20px;'>" . number_format($pew, 2) . " ltrs<br></b></p></center>
+                                ";
+
+                            } else {
+                                echo "Error updating sold liters: " . $con->error;
+                            }
+                                                
+                }
+            }
+
+            echo "<script>
+            setTimeout(function() {
+                window.location.href='./index.php';
+            }, 10000); // 10000 milliseconds = 10 seconds
+          </script>";            // Close the check statement
+            $checkSoldStmt->close();
+        }
+    }
+    // Close the database connection outside of the condition
+    $con->close();
+}
+?>
+
+
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div></div></div></div></div>
+
              
     
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>

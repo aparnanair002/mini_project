@@ -19,7 +19,7 @@ if (isset($_POST['sub'])) {
     // Execute the statement for updating milk records
     if ($stmt->execute()) {
         // If feedback is provided, insert it into the feedback table
-        echo "<script>alert('Milk details added successfully!'); window.location.href='../html/add_milk_rec.php?id=$m_id';</script>";
+        echo "<script>alert('Milk details added successfully!'); window.location.href='../html/milk_edit.php';</script>";
     } else {
         echo "<script>alert('Error adding milk details: " . $stmt->error . "'); window.location.href='../html/add_milk_rec.php?id=$m_id';</script>";
     }
