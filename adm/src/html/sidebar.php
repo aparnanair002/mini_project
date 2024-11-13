@@ -104,6 +104,12 @@
                                     <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Report of Milk</span>
                                 </a>
                             </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-sublink" href="./addmilk.php">
+                                    <i class="ti ti-pin"></i><span class="hide-menu" style=" margin-bottom: 20px;margin-left: 20px;">Add New Entry</span>
+                                </a>
+                            </li>
+                            
                         </ul>
                     </li>
                     <li class="sidebar-item">
@@ -159,11 +165,18 @@
                             </li>
                         </ul>
                     </li>
-                       
+                    <li class="sidebar-item">
+                        <a class="sidebar-sublink" href="./payment.php" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-pin"></i>
+                            </span>
+                            <span class="hide-menu">Payment</span>
+                        </a>
+                    </li>
                    
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./logout.php" aria-expanded="false">
+                        <a class="sidebar-sublink" href="./logout.php" aria-expanded="false">
                             <span>
                                 <i class="ti ti-logout"></i>
                             </span>

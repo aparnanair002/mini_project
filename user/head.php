@@ -54,7 +54,49 @@
               &nbsp; Dairy Direct
             </span>
           </a>
+          <?php
 
+// Assuming $con is your database connection
+$se = $_SESSION['f_Id']; // Get the farmer's ID from the session
+include("databases/connection.php");
+// Prepare and bind the SQL statement
+if ($stmt = $con->prepare("
+    SELECT f_name, gender 
+    FROM tbl_dairyf 
+    WHERE f_Id = ?
+")) {
+    // Bind the parameter
+    $stmt->bind_param("s", $se);
+
+    // Execute the statement
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+
+    // Check if there are results
+    if ($result->num_rows > 0) {
+        // Fetch the data
+        while ($row = $result->fetch_assoc()) {
+            // Escape output to prevent XSS
+            $name = htmlspecialchars($row['f_name']);
+            $gender = htmlspecialchars($row['gender']);
+
+
+        }
+    } else {
+        echo "No results found.";
+    }
+
+    // Close the statement
+    $stmt->close();
+} else {
+    echo "Failed to prepare the SQL statement.";
+}
+
+// Close the connection
+$con->close();
+?>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""> </span>
           </button>
@@ -74,12 +116,22 @@
                 <a class="btn1" href="fedit.php">Edit My details</a>
               </li>
               <li class="nav-item">
-                <img src="images/fm.png" height="50px" width="50px" style="border-radius: 50px;"><!--***php code for name***-->
-              </li>
-              <!-- <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button> -->
+                <?php
+                if ($gender === 'Female') {
+                  echo '<img src="images/fg.png" height="50px" width="50px" style="border-radius: 50px;">';
+                } else {
+                  echo '<img src="images/fm.png" height="50px" width="50px" style="border-radius: 50px;">';
+                }
+                echo"</li><li class='nav-item'><a class='nav-link' href='./fedit.php'>$name</a><li>
+                </li><li class='nav-item'><a class='nav-link' href='./logout.php'>Logout</a><li>";
+
+
+                
+              ?>  
+             
+
+            </li>
+             
               </form>
             </ul>
           </div>
