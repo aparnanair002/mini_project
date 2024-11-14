@@ -2,29 +2,45 @@
  <head> 
 <style>
         body {
-            background-color: #f8f9fa;
-        }
-        .table-container {
-            margin: 20px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        .btn-edit {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .btn-edit:hover {
-            text-decoration: underline;
-        }
-        /* Style for the Sort By label */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    overflow-y: hidden; /* Prevent horizontal overflow */
+
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
 
 
+.table-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Allows horizontal scrolling if necessary */
+}
 
+h2 {
+    margin-bottom: 20px;
+}
+
+.btn-edit {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.btn-edit:hover {
+    text-decoration: underline;
+}
+.table-scroll {
+    max-height: 600px; /* Increase the maximum height for the table */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    overflow-x: hidden; /* Disable horizontal scrolling */
+}
+
+.table-responsive {
+    width: 100%; /* Ensure the table is responsive */
+}
 .form-group {
     margin-bottom: 1rem; /* Adds space below the form group */
 }
@@ -44,13 +60,47 @@
 
 .form-control {
     min-width: 150px; /* Minimum width for select elements */
-    max-width: 200px; /* Maximum width for select elements */
+    max-width: 100%; /* Make it responsive */
+    flex: 1; /* Allows the select elements to grow and fill space */
 }
 
 .btn {
     margin-left: 1rem; /* Adds space to the left of the button */
 }
-    </style>
+
+/* Table styling */
+.table {
+    width: 100%; /* Makes the table responsive */
+    table-layout: auto; /* Allows the table to adjust based on content */
+}
+
+.table th, .table td {
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Hides overflow text */
+    text-overflow: ellipsis; /* Adds ellipsis for overflow text */
+}
+
+.table-responsive {
+    overflow-x: auto; /* Allows horizontal scrolling for the table */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .form-control {
+        min-width: 100%; /* Full width on small screens */
+    }
+
+    .me-3 {
+        margin-right: 0; /* Reset margin for small screens */
+        margin-bottom: 1rem; /* Add space below instead */
+    }
+
+    .btn {
+        margin-left: 0; /* Reset margin for small screens */
+        width: 100%; /* Full width for buttons on small screens */
+    }
+}
+    </style></head> 
     
 <?php
 session_start();
@@ -59,80 +109,42 @@ if (!isset($_SESSION['f_Id'])) {
   exit;
 }
 
-include("headlogin.php");
+include("head.php");
 include("./databases/connection.php");
 ?>   
- </head> 
+ 
 <body>
 
   <div class="hero_area">
 
-    <div class="hero_bg_box" style="background-color: #2D3f4e;">
-      <!-- <div class="bg_img_box">
-        <img src="images/hero-bg.png" alt="">
-      </div> -->
-    </div>
-
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <img src="images/logo2.png" style="margin-left: 100px;" height="70px" width="70px">
-
-            <span>
-              &nbsp; Dairy Direct
-            </span>
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-          
-              <li class="nav-item">
-                <!-- <a class="nav-link" href="fsignlogin.php"> <i class="fa fa-user" aria-hidden="true"></i> &nbsp;Already have an account ? Login</a> -->
-              </li>
-             
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
  <!-- slider section -->
  <section class="slider_section " style="background-color: #2d3f4e;">
             <div class="container ">
                 <div class="row">
                 
-                <div class="col-md-12 " style="background-color:#f8f9fa;color:#2d3f4e;">
-                  <div class="detail-box mb-5 mt-5">
-                    <h2 >
-                      Dairy  Direct Report
-                    </h2>
-                  </div>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-<div class="form-group" >
-    <form method="POST" action="" class="d-flex align-items-center">
-       
-        <div class="me-3">
-        <label for="year">Select Year:</label>
-        <select id="year" name="year" class="form-control" onchange="this.form.submit()">
-            <option disabled selected value>Select year &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;</option>
-            <?php 
-                // Define the range of years you want to display
-                $currentYear = date("Y"); // Get the current year
-                $startYear = $currentYear - 10; // Start from 10 years ago
-                $endYear = $currentYear + 10; // End 10 years in the future
-                
-                for ($y = $startYear; $y <= $endYear; $y++): ?>
-                    <option value="<?php echo $y; ?>" <?php echo (isset($_POST['year']) && $_POST['year'] == $y) ? 'selected' : ''; ?>>
-                        <?php echo $y; ?>
-                    </option>
-            <?php endfor; ?>
-        </select>
+                <div class="col-md-12" style="background-color:#f8f9fa;color:#2d3f4e;">
+                  
+                  
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="form-group" >
+                            <form method="POST" action="" class="d-flex align-items-center mt-3">
+                            
+                                <div class="me-3">
+                                <label for="year">Select Year:</label>
+                                <select id="year" name="year" class="form-control" onchange="this.form.submit()">
+                                    <option disabled selected value>Select year &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;</option>
+                                    <?php 
+                                        // Define the range of years you want to display
+                                        $currentYear = date("Y"); // Get the current year
+                                        $startYear = $currentYear - 10; // Start from 10 years ago
+                                        $endYear = $currentYear + 10; // End 10 years in the future
+                                        
+                                        for ($y = $startYear; $y <= $endYear; $y++): ?>
+                                            <option value="<?php echo $y; ?>" <?php echo (isset($_POST['year']) && $_POST['year'] == $y) ? 'selected' : ''; ?>>
+                                                <?php echo $y; ?>
+                                            </option>
+                                    <?php endfor; ?>
+                                </select>
         </div>
         <div class="me-3">
             <label for="month">Select Month:</label>
@@ -210,76 +222,69 @@ error_log("SQL Query: " . $sql);
 
     $result = $con->query($sql);
     if ($result->num_rows > 0): ?>
-        <div class="table-responsive">
-        <table class="table table-striped table-bordered" id="data-table">
-    <thead class="thead-dark">
-        <tr>
-            <th>S.No</th>
-            <th>Date</th>
-            <th>Quantity (liters)</th>
-            <th>Analyzer Readings </th>
-            <th>Milk Type</th>
+       <div class="table-container">
+    <div class="table-responsive"  style="width: 1000px;">
+        <div class="table-scroll">
+            <table class="table table-striped table-bordered" id="data-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Date</th>
+                        <th>Milk Type</th>
+                        <th>Quantity (liters)</th>
+                        <th>Analyzer Readings</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $id = 1;
+                    // Output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>"; // Start a new row for each record
+                        echo "<td>" . $id . "</td>";
+                        echo "<td>" . htmlspecialchars($row["t_date"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["milk_type"]) . "</td>";
 
-            <th>Amount</th>
-            
-          </tr>
-    </thead>
-    <tbody>
-    <?php
-$id = 1;
-// Output data of each row
-while ($row = $result->fetch_assoc()) {
-    echo "<tr>"; // Start a new row for each record
-    echo "<td>" . $id . "</td>";
-    echo "<td>" . htmlspecialchars($row["t_date"]) . "</td>";
-    echo "<td>" . htmlspecialchars($row["milk_type"]) . "</td>";
+                        // Prepare the quantity and analyzer readings
+                        $quantityAndReadings = '';
+                        if ($row["c_ltr"] == $row["a_ltr"]) {
+                            $quantityAndReadings = htmlspecialchars($row["c_ltr"]) . " ltr";
+                        } else {
+                            $quantityAndReadings = "Collected from home: " . htmlspecialchars($row["c_ltr"]) . " ltr, Reported in center: " . htmlspecialchars($row["a_ltr"]) . " ltr";
+                        }
 
-    // Prepare the quantity and analyzer readings
-    $quantityAndReadings = '';
-    if ($row["c_ltr"] == $row["a_ltr"]) {
-        $quantityAndReadings = htmlspecialchars($row["c_ltr"]) . " ltr";
-    } else {
-        $quantityAndReadings = "Collected from home: " . htmlspecialchars($row["c_ltr"]) . " ltr, Reported in center: " . htmlspecialchars($row["a_ltr"]) . " ltr";
-    }
+                        // Combine quantity and analyzer readings into a single column
+                        echo "<td>" . $quantityAndReadings . "</td>";
+                        echo "<td> Fat: " . htmlspecialchars($row["fat"]) . ", SNF: " . htmlspecialchars($row["snf"]) . ", Reading: " . htmlspecialchars($row["reading"]) . "</td>";
+                        echo "<td> ₹ " . htmlspecialchars($row["amount"]) . "</td>";
+                        echo "</tr>"; // Close the row
 
-    // Combine quantity and analyzer readings into a single column
-    echo "<td>" . $quantityAndReadings . "</td>";
-    echo "<td> Fat: " . htmlspecialchars($row["fat"]) . ", SNF: " . htmlspecialchars($row["snf"]) . ", Reading: " . htmlspecialchars($row["reading"]) . "</td>";
-    echo "<td> ₹ " . htmlspecialchars($row["amount"]) . "</td>";
-    echo "</tr>"; // Close the row
-
-    $id++;
-}
-?>
-    </tbody>
-</table>
+                        $id++;
+                    }
+                    ?>    
+                </tbody>
+            </table>
         </div>
-    <?php else: ?>
+    </div>
+</div>    <?php else: ?>
         <p class="alert alert-warning">No records found.</p>
     <?php endif; ?>
-
-</div>
-
-<?php
-// Close the connection
-$con->close();
-?>
+    
+    <?php
+    // Close the connection
+    $con->close();
+    ?>
                       
                     
                     </div>
-                  </div></form>
                 </div>
-                <!-- <div class="col-md-2">
-                 <div class="img-box">
-                    <img src="images/slider-img.png" alt="">
-                  </div>
-                </div> -->
-              </div>
             </div>
-            
+        </div>
+    </div>
     </section>
-    <!-- end slider section -->
 </body>
+
 <script>
     document.getElementById('download-btn').addEventListener('click', function() {
         // Get the table element
@@ -318,5 +323,6 @@ $con->close();
     });
 
 </script>
+
 
 </html>

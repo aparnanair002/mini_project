@@ -32,5 +32,67 @@
   <link href="css/responsive.css" rel="stylesheet" />
 
 </head>
+<style>
+  body {
+    background-color: #f8f9fa;
+}
 
-     </html>
+.table-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.btn-edit {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.btn-edit:hover {
+    text-decoration: underline;
+}
+
+.form-group {
+    margin-bottom: 1rem; /* Adds space below the form group */
+}
+
+.d-flex {
+    display: flex; /* Enables flexbox layout */
+    flex-wrap: wrap; /* Allows items to wrap in case of small screens */
+}
+
+.align-items-center {
+    align-items: center; /* Vertically centers the items */
+}
+
+.me-3 {
+    margin-right: 1rem; /* Adds space between the elements */
+}
+
+.form-control {
+    min-width: 150px; /* Minimum width for select elements */
+    max-width: 200px; /* Maximum width for select elements */
+}
+
+.btn {
+    margin-left: 1rem; /* Adds space to the left of the button */
+}
+
+/* Add this to prevent overflow */
+.table-responsive {
+    overflow-x: auto; /* Allow horizontal scrolling */
+}
+
+.table {
+    width: 100%; /* Ensure the table takes full width */
+    table-layout: auto; /* Allow automatic table layout */
+}
+</style>
+
+ 
