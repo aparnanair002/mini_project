@@ -1,4 +1,35 @@
+<!DOCTYPE html>
 <html>
+  <head>
+  <link rel="icon" href="images/logo.png" type="images/logo.png">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
+    <link rel="stylesheet" href="css/tooplate-wave-cafe.css">
+
+<style>
+  .warn{
+    color:#E8FFB7; 
+  margin-top: 20px; 
+  text-align:left;
+  font-size: 25px;
+
+
+  }
+  .btn-circle {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-circle i {
+    font-size: 16px; /* Adjust icon size */
+}
+  
+</style></head>
+
 <?php
 
 session_start();
@@ -6,9 +37,14 @@ if (!isset($_SESSION['f_Id'])) {
   header('Location: fsignlogin.php');
   exit;
 }
+include("head.php");
+include("./databases/connection.php");
+?>
+<body>
+<!-- slider section -->
 
-include("databases/connection.php");
-include("headlogin.php");
+                    <?php
+
 
 $se = $_SESSION['f_Id'];; // or use $_POST['session_id'] based on your form method
 
@@ -61,35 +97,7 @@ $con->close();
       </div> -->
     </div>
 
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <img src="images/logo2.png" style="margin-left: 100px;" height="70px" width="70px">
 
-            <span>
-              &nbsp; Dairy Direct
-            </span>
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-          
-              <li class="nav-item">
-                <!-- <a class="nav-link" href="fsignlogin.php"> <i class="fa fa-user" aria-hidden="true"></i> &nbsp;Already have an account ? Login</a> -->
-              </li>
-             
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
  <!-- slider section -->
  <section class="slider_section " style="background-color: #2d3f4e;">
             <div class="container ">
@@ -182,13 +190,8 @@ $con->close();
     });
 </script>
 </form>
-                </div>
-                
-              </div>
-            </div>
-        
-    </section>
-    <!-- end slider section -->
+             
 </body>
 
 </html>
+

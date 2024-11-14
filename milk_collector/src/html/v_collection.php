@@ -80,7 +80,6 @@ $result = $con->query($sql);
                         <th>Farmer Address</th>
                         <th>Milk Type</th>
                         <th>Quantity (liters)</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,9 +94,7 @@ $result = $con->query($sql);
                                 <td>" . htmlspecialchars($row["f_homeaddress"]) . "</td>
                                 <td>" . htmlspecialchars($row["milk_type"]) . "</td>
                                 <td>" . htmlspecialchars($row["c_ltr"]) . "</td>
-                                <td>
-                                    <button class='btn btn-primary'><a style='color:white;' href='edit_milk_records.php?id=" . htmlspecialchars($row["m_id"]) . "'>Edit</a></button>
-                                </td>
+                                
                               </tr>";
                         $id++;
                     }
