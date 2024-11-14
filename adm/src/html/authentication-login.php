@@ -23,7 +23,7 @@
                 <a href="./index.php" class="text-nowrap logo-img text-center d-block py-3 w-100">
                   <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
                 </a>
-                <p class="text-center">Your Social Campaigns</p>
+                <p class="text-center">Society Login</p>
                 <form method="post" action="../databases/a_login.php" >
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label>

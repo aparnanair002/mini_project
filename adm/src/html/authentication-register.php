@@ -29,7 +29,7 @@ include "../databases/connection.php";
 
 
                 
-                <p class="text-center">Your Social Campaigns</p>
+                <p class="text-center">Society Register</p>
                 <form method="post" action="../databases/register.php" id="signupForm">
                   <div class="mb-3">
                     <label for="exampleInputtext1" class="form-label">Name</label>
